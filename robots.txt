@@ -28,5 +28,4 @@ Allow: /
 User-agent: Applebot-Extended
 Allow: /
 
-# DOMENA: po podpięciu domeny podmienić adres sitemap
-Sitemap: https://DOMENA/sitemap.xml
+Sitemap: https://coppaspecialty.cafe/sitemap.xml

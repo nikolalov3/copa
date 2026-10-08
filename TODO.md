@@ -9,7 +9,7 @@ v0.2 (2026-10-07): nowy design (minimalizm, zdjęcia niosą kolor), treści od K
 - [ ] Opisy dla sezonowych bez opisu: białe brzoskwinie z tymiankiem cytrynowym, pralina z orzecha laskowego (teraz jedno zdanie z nazwy).
 - [ ] Ogródek i wydarzenia: wzięte z wyróżnionych relacji na IG, klient nie potwierdził w mailu. Potwierdzić w czwartek.
 - [ ] Telefon i mail do kontaktu (klient nie podał, telefon nie musi być publiczny).
-- [ ] Domena.
+- [x] Domena: coppaspecialty.cafe (placeholdery podmienione 2026-10-08).
 
 ## Logo
 - Oryginały od klienta: `img/COPPA_LOGO.png`, `img/COPPA_LOGOObszar roboczy 1_11.png`, `img/COPPA_LOGOObszar roboczy 6_5.png` (PNG z tłem).
