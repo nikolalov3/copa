@@ -2,19 +2,20 @@
 
 v0.2 (2026-10-07): nowy design (minimalizm, zdjęcia niosą kolor), treści od Kasi i Tomka, 8 zdjęć tiramisu, prawdziwe logo.
 
+## Decyzje Mikołaja (2026-10-08)
+- Cen NIE podajemy. Sekcja Menu: tak, ale jako tekst w HTML (pozycje bez cen), przepisana ze zdjęcia karty, które Mikołaj robi w lokalu. Zdjęcie karty może być dodatkiem, nie źródłem treści.
+- Zdjęć wnętrza nie robimy, hero zostaje z tiramisu klasycznym.
+- Logo zostaje jako PNG wycięte z tła.
+- Ogródek i wydarzenia potwierdzone, zostają.
+- Opisy dwóch sezonowych (brzoskwinia+tymianek, pralina) dopisane w stylu Kasi, PL i EN.
+
 ## Od klienta, czeka
-- [ ] Karta menu sezonowego z cenami (klient: „w przyszłym tygodniu”). Dopisać ceny do galerii tiramisu, do sekcji Kawa i do JSON-LD (`offers`).
-- [ ] Zdjęcia wnętrza / baru / ogródka (do hero i sekcji Miejsce). Teraz hero używa zdjęcia tiramisu klasycznego.
-- [ ] Zdjęcie tiramisu śliwka z kruszonką: smak jest w karcie, ale bez zdjęcia NIE wchodzi na stronę (decyzja Mikołaja).
-- [ ] Opisy dla sezonowych bez opisu: białe brzoskwinie z tymiankiem cytrynowym, pralina z orzecha laskowego (teraz jedno zdanie z nazwy).
-- [ ] Ogródek i wydarzenia: wzięte z wyróżnionych relacji na IG, klient nie potwierdził w mailu. Potwierdzić w czwartek.
-- [ ] Telefon i mail do kontaktu (klient nie podał, telefon nie musi być publiczny).
-- [x] Domena: coppaspecialty.cafe (placeholdery podmienione 2026-10-08).
+- [ ] Zdjęcie karty menu (Mikołaj, w lokalu) → sekcja Menu bez cen + link w nawigacji i doku.
+- [ ] Zdjęcie tiramisu śliwka z kruszonką → dziewiąty slajd w galerii.
+- [ ] Mail kontaktowy (opcjonalnie) → stopka + `email` w JSON-LD.
 
 ## Logo
-- Oryginały od klienta: `img/COPPA_LOGO.png`, `img/COPPA_LOGOObszar roboczy 1_11.png`, `img/COPPA_LOGOObszar roboczy 6_5.png` (PNG z tłem).
-- Wycięte z tła do webu: `img/logo/coppa-wordmark-rose.png` (pasek górny), `coppa-stack-cream.png` (stopka), `coppa-mark-rose.png` / `coppa-mark-cream.png` (znak), `coppa-lockup-rose.png` (z taglinem). Ikony `img/icon-180.png`, `icon-512.png` z prawdziwego znaku.
-- Jeśli klient ma SVG, podmienić, bo PNG z wycięcia ma miękkie krawędzie przy dużym powiększeniu.
+- Oryginały od klienta w `img/_src/`. Wycięte do webu w `img/logo/`. Zostaje tak.
 
 ## Zdjęcia
 - Oryginały w `img/*.JPG` (do 4,6 MB, nie linkowane ze strony). Wersje webowe w `img/tiramisu/<slug>-640.webp` i `-1080.webp`.
