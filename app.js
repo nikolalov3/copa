@@ -25,19 +25,21 @@
     const padLeft  = () => parseFloat(getComputedStyle(track).paddingLeft) || 0;
     const maxScroll = () => Math.max(0, track.scrollWidth - track.clientWidth);
     const step = () => (slides[1] ? slides[1].offsetLeft - slides[0].offsetLeft : slides[0].offsetWidth);
+    /* koniec = ostatnia pozycja dociągnięcia (na mobile tor ma jeszcze kilkanaście px luzu po ostatniej karcie) */
+    const endX = () => Math.min(maxScroll(), slides[n - 1].offsetLeft - padLeft());
 
     /* która karta jest „bieżąca”: najbliższa lewej krawędzi, a na samym końcu zawsze ostatnia
        (na desktopie widać kilka kart naraz, więc ostatnie nigdy nie dojeżdżają do lewej krawędzi) */
     const current = () => {
       const sl = track.scrollLeft;
-      if (sl >= maxScroll() - 1) return n - 1;
+      if (sl >= endX() - 1) return n - 1;
       const x = sl + padLeft();
       let best = 0, bd = Infinity;
       slides.forEach((s, i) => { const d = Math.abs(s.offsetLeft - x); if (d < bd) { bd = d; best = i; } });
       return best;
     };
     const render = () => {
-      const i = current(), sl = track.scrollLeft, mx = maxScroll();
+      const i = current(), sl = track.scrollLeft, mx = endX();
       if (i !== active) { active = i; if (idxEl) idxEl.textContent = pad2(i + 1); }
       if (fill) fill.style.transform = `scaleX(${mx ? Math.min(1, sl / mx) : 1})`;
       prev && prev.toggleAttribute('disabled', sl <= 1);
