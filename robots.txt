@@ -1,0 +1,32 @@
+# COPPA Specialty Coffee & Tiramisu
+# Roboty wyszukiwarek i asystentów AI: wszystko dozwolone.
+User-agent: *
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+User-agent: OAI-SearchBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: anthropic-ai
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: Google-Extended
+Allow: /
+User-agent: Googlebot
+Allow: /
+User-agent: Bingbot
+Allow: /
+User-agent: CCBot
+Allow: /
+User-agent: Applebot
+Allow: /
+User-agent: Applebot-Extended
+Allow: /
+
+# DOMENA: po podpięciu domeny podmienić adres sitemap
+Sitemap: https://DOMENA/sitemap.xml
