@@ -10,7 +10,7 @@
     if (img.complete && img.naturalWidth) on(); else { img.addEventListener('load', on, { once: true }); img.addEventListener('error', on, { once: true }); }
   });
 
-  /* 1. Galeria tiramisu: scroll-snap + licznik + pasek + strzałki + drag myszą + lekka paralaksa */
+  /* 1. Galeria tiramisu: scroll-snap + licznik + pasek postępu + strzałki + drag myszą + lekka paralaksa */
   const track = $('#galTrack');
   if (track) {
     const slides = $$('.slide', track);
@@ -18,29 +18,35 @@
     const idxEl  = $('#galIdx'), totEl = $('#galTotal'), fill = $('#galFill');
     const prev   = $('#galPrev'), next = $('#galNext');
     const pad2   = n => String(n).padStart(2, '0');
-    let active = -1, target = 0;
-    if (totEl) totEl.textContent = pad2(slides.length);
+    const n = slides.length;
+    let active = -1;
+    if (totEl) totEl.textContent = pad2(n);
 
-    const padLeft = () => parseFloat(getComputedStyle(track).paddingLeft) || 0;
-    const setArrows = i => { prev && prev.toggleAttribute('disabled', i === 0); next && next.toggleAttribute('disabled', i === slides.length - 1); };
-    const setActive = i => {
-      if (i === active) return;
-      active = i; target = i;
-      if (idxEl) idxEl.textContent = pad2(i + 1);
-      if (fill) fill.style.transform = `scaleX(${(i + 1) / slides.length})`;
-      setArrows(i);
-    };
-    const nearest = () => {
-      const x = track.scrollLeft + padLeft();
+    const padLeft  = () => parseFloat(getComputedStyle(track).paddingLeft) || 0;
+    const maxScroll = () => Math.max(0, track.scrollWidth - track.clientWidth);
+    const step = () => (slides[1] ? slides[1].offsetLeft - slides[0].offsetLeft : slides[0].offsetWidth);
+
+    /* która karta jest „bieżąca”: najbliższa lewej krawędzi, a na samym końcu zawsze ostatnia
+       (na desktopie widać kilka kart naraz, więc ostatnie nigdy nie dojeżdżają do lewej krawędzi) */
+    const current = () => {
+      const sl = track.scrollLeft;
+      if (sl >= maxScroll() - 1) return n - 1;
+      const x = sl + padLeft();
       let best = 0, bd = Infinity;
       slides.forEach((s, i) => { const d = Math.abs(s.offsetLeft - x); if (d < bd) { bd = d; best = i; } });
       return best;
     };
-    const go = i => {
-      i = Math.max(0, Math.min(slides.length - 1, i));
-      target = i; setArrows(i);
-      track.scrollTo({ left: slides[i].offsetLeft - padLeft(), behavior: reduce ? 'auto' : 'smooth' });
+    const render = () => {
+      const i = current(), sl = track.scrollLeft, mx = maxScroll();
+      if (i !== active) { active = i; if (idxEl) idxEl.textContent = pad2(i + 1); }
+      if (fill) fill.style.transform = `scaleX(${mx ? Math.min(1, sl / mx) : 1})`;
+      prev && prev.toggleAttribute('disabled', sl <= 1);
+      next && next.toggleAttribute('disabled', sl >= mx - 1);
     };
+    const scrollToX = x => track.scrollTo({ left: Math.max(0, Math.min(maxScroll(), x)), behavior: reduce ? 'auto' : 'smooth' });
+    const goTo = i => scrollToX(slides[Math.max(0, Math.min(n - 1, i))].offsetLeft - padLeft());
+    const by   = dir => scrollToX(track.scrollLeft + dir * step());
+
     const parallax = () => {
       if (reduce) return;
       const vw = track.clientWidth, sl = track.scrollLeft;
@@ -53,21 +59,21 @@
     let raf = 0;
     track.addEventListener('scroll', () => {
       cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(() => { setActive(nearest()); parallax(); });
+      raf = requestAnimationFrame(() => { render(); parallax(); });
     }, { passive: true });
-    prev?.addEventListener('click', () => go(target - 1));
-    next?.addEventListener('click', () => go(target + 1));
+    prev?.addEventListener('click', () => by(-1));
+    next?.addEventListener('click', () => by(1));
     track.addEventListener('keydown', e => {
-      if (e.key === 'ArrowRight') { e.preventDefault(); go(target + 1); }
-      if (e.key === 'ArrowLeft')  { e.preventDefault(); go(target - 1); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); by(1); }
+      if (e.key === 'ArrowLeft')  { e.preventDefault(); by(-1); }
     });
-    let down = false, sx = 0, sl = 0, moved = false;
-    track.addEventListener('pointerdown', e => { if (e.pointerType !== 'mouse') return; down = true; moved = false; sx = e.clientX; sl = track.scrollLeft; track.classList.add('dragging'); });
-    window.addEventListener('pointermove', e => { if (!down) return; const dx = e.clientX - sx; if (Math.abs(dx) > 4) moved = true; track.scrollLeft = sl - dx; });
-    window.addEventListener('pointerup', () => { if (!down) return; down = false; track.classList.remove('dragging'); if (moved) go(nearest()); });
+    let down = false, sx = 0, sl0 = 0, moved = false;
+    track.addEventListener('pointerdown', e => { if (e.pointerType !== 'mouse') return; down = true; moved = false; sx = e.clientX; sl0 = track.scrollLeft; track.classList.add('dragging'); });
+    window.addEventListener('pointermove', e => { if (!down) return; const dx = e.clientX - sx; if (Math.abs(dx) > 4) moved = true; track.scrollLeft = sl0 - dx; });
+    window.addEventListener('pointerup', () => { if (!down) return; down = false; track.classList.remove('dragging'); if (moved) goTo(current()); });
     track.addEventListener('click', e => { if (moved) { e.preventDefault(); moved = false; } }, true);
-    setActive(0); parallax();
-    addEventListener('resize', parallax, { passive: true });
+    render(); parallax();
+    addEventListener('resize', () => { render(); parallax(); }, { passive: true });
   }
 
   /* 2. „Otwarte do …” w strefie Europe/Warsaw + dzisiejszy wiersz w tabeli godzin */
