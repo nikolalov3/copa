@@ -159,6 +159,7 @@ details p{padding:0 0 20px;color:var(--ink-2);line-height:1.65;max-width:62ch}
 .footer-grid{display:grid;gap:30px}
 .footer-brand img{height:64px;width:auto;opacity:.95}
 .footer-brand p{margin-top:16px;color:rgba(246,242,235,.65);line-height:1.6;font-size:.92rem}
+.footer-mail a{color:var(--paper);border-bottom:1px solid rgba(246,242,235,.35)}
 .footer-links{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:.92rem;font-weight:500}
 .footer-links a{opacity:.75}
 .footer-links a:hover{opacity:1}

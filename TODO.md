@@ -12,7 +12,7 @@ v0.2 (2026-10-07): nowy design (minimalizm, zdjęcia niosą kolor), treści od K
 ## Od klienta, czeka
 - [ ] Zdjęcie karty menu (Mikołaj, w lokalu) → sekcja Menu bez cen + link w nawigacji i doku.
 - [ ] Zdjęcie tiramisu śliwka z kruszonką → dziewiąty slajd w galerii.
-- [ ] Mail kontaktowy (opcjonalnie) → stopka + `email` w JSON-LD.
+- [x] Mail coppaspecialty@gmail.com (współpraca, B2B) w stopce + `email` w JSON-LD (2026-10-10).
 
 ## Logo
 - Oryginały od klienta w `img/_src/`. Wycięte do webu w `img/logo/`. Zostaje tak.
