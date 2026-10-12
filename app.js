@@ -14,12 +14,36 @@
   const initGallery = root => {
     const track = root.querySelector('.gal-track');
     if (!track) return;
-    const slides = [...track.querySelectorAll('.slide')];
+    let slides = [...track.querySelectorAll('.slide')];
+    const n = slides.length;
+    /* pętla (data-loop): trzy zestawy kart [kopia][oryginał][kopia]; start w środku,
+       po zatrzymaniu przewijania niewidoczny przeskok z kopii brzegowej do środka.
+       Kopie używają tych samych plików (cache przeglądarki), są ukryte przed czytnikami i klawiaturą. */
+    const loop = root.hasAttribute('data-loop') && n > 1;
+    if (loop) {
+      const mk = () => {
+        const fr = document.createDocumentFragment();
+        slides.forEach(s => {
+          const c = s.cloneNode(true);
+          c.setAttribute('aria-hidden', 'true'); c.inert = true; c.dataset.clone = '1';
+          c.querySelectorAll('img').forEach(im => {
+            im.classList.remove('ld');
+            const on = () => im.classList.add('ld');
+            if (im.complete && im.naturalWidth) on(); else { im.addEventListener('load', on, { once: true }); im.addEventListener('error', on, { once: true }); }
+          });
+          fr.appendChild(c);
+        });
+        return fr;
+      };
+      track.insertBefore(mk(), slides[0]);
+      track.appendChild(mk());
+      slides = [...track.querySelectorAll('.slide')];
+    }
     const imgs   = slides.map(s => s.querySelector('img'));
     const idxEl  = root.querySelector('.gal-idx'), totEl = root.querySelector('.gal-total'), fill = root.querySelector('.gal-fill');
     const prev   = root.querySelector('.gal-prev'), next = root.querySelector('.gal-next');
-    const pad2   = n => String(n).padStart(2, '0');
-    const n = slides.length;
+    const pad2   = k => String(k).padStart(2, '0');
+    const N = slides.length;
     let active = -1;
     if (totEl) totEl.textContent = pad2(n);
     /* galeria lustrzana (data-rev): tor w kierunku rtl, przeglądarka liczy scrollLeft ujemnie, więc pracujemy na odległości od startu */
@@ -32,11 +56,12 @@
     const edge = s => (isRev() ? track.clientWidth - s.offsetLeft - s.offsetWidth : s.offsetLeft);
     const maxScroll = () => Math.max(0, track.scrollWidth - track.clientWidth);
     const step = () => (slides[1] ? Math.abs(edge(slides[1]) - edge(slides[0])) : slides[0].offsetWidth);
+    const setW = () => edge(slides[n]) - edge(slides[0]);
     /* koniec toru = ostatnia pozycja dociągnięcia (na desktopie ostatnie karty nie dojeżdżają do lewej krawędzi) */
-    const endX = () => Math.min(maxScroll(), edge(slides[n - 1]) - padLeft());
+    const endX = () => Math.min(maxScroll(), edge(slides[N - 1]) - padLeft());
     const current = () => {
       const sl = pos();
-      if (sl >= endX() - 1) return n - 1;
+      if (!loop && sl >= endX() - 1) return N - 1;
       const x = sl + padLeft();
       let best = 0, bd = Infinity;
       slides.forEach((s, i) => { const d = Math.abs(edge(s) - x); if (d < bd) { bd = d; best = i; } });
@@ -44,6 +69,12 @@
     };
     const render = () => {
       const mx = endX(), sl = pos();
+      if (loop) {
+        const i = current() % n;
+        if (i !== active) { active = i; if (idxEl) idxEl.textContent = pad2(i + 1); }
+        if (fill) fill.style.transform = `scaleX(${(i + 1) / n})`;
+        return;
+      }
       root.classList.toggle('no-scroll', mx <= 4);
       const i = mx <= 4 ? 0 : current();
       if (i !== active) { active = i; if (idxEl) idxEl.textContent = pad2(i + 1); }
@@ -52,7 +83,7 @@
       next && next.toggleAttribute('disabled', sl >= mx - 1);
     };
     const scrollToX = x => track.scrollTo({ left: sg() * Math.max(0, Math.min(maxScroll(), x)), behavior: reduce ? 'auto' : 'smooth' });
-    const goTo = i => scrollToX(edge(slides[Math.max(0, Math.min(n - 1, i))]) - padLeft());
+    const goTo = i => scrollToX(edge(slides[Math.max(0, Math.min(N - 1, i))]) - padLeft());
     const by   = dir => scrollToX(pos() + dir * step());
     const parallax = () => {
       if (reduce) return;
@@ -64,22 +95,41 @@
         imgs[i].style.transform = `translateX(${(-d * 5).toFixed(2)}%) scale(1.06)`;
       });
     };
-    let raf = 0;
-    track.addEventListener('scroll', () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(() => { render(); parallax(); }); }, { passive: true });
+    let raf = 0, idle = 0, touching = false, down = false;
+    const setPos = x => { track.scrollLeft = sg() * x; };
+    const toMiddle = i => setPos(edge(slides[n + (((i % n) + n) % n)]) - padLeft());
+    const recenter = () => {
+      if (!loop || touching || down) return;
+      const i = current();
+      if (i < n) setPos(pos() + setW());
+      else if (i >= 2 * n) setPos(pos() - setW());
+    };
+    const settle = () => { clearTimeout(idle); idle = setTimeout(recenter, 180); };
+    track.addEventListener('scroll', () => {
+      cancelAnimationFrame(raf); raf = requestAnimationFrame(() => { render(); parallax(); });
+      if (loop) settle();
+    }, { passive: true });
+    if (loop) {
+      if ('onscrollend' in window) track.addEventListener('scrollend', recenter);
+      track.addEventListener('touchstart', () => { touching = true; clearTimeout(idle); }, { passive: true });
+      track.addEventListener('touchend', () => { touching = false; settle(); }, { passive: true });
+      track.addEventListener('touchcancel', () => { touching = false; settle(); }, { passive: true });
+    }
     prev?.addEventListener('click', () => by(-1));
     next?.addEventListener('click', () => by(1));
     track.addEventListener('keydown', e => {
       if (e.key === 'ArrowRight') { e.preventDefault(); by(sg()); }
       if (e.key === 'ArrowLeft')  { e.preventDefault(); by(-sg()); }
     });
-    let down = false, sx = 0, sl0 = 0, moved = false;
+    let sx = 0, sl0 = 0, moved = false;
     track.addEventListener('pointerdown', e => { if (e.pointerType !== 'mouse') return; down = true; moved = false; sx = e.clientX; sl0 = pos(); track.classList.add('dragging'); });
     window.addEventListener('pointermove', e => { if (!down) return; const dx = e.clientX - sx; if (Math.abs(dx) > 4) moved = true; track.scrollLeft = sg() * Math.max(0, sl0 - sg() * dx); });
-    window.addEventListener('pointerup', () => { if (!down) return; down = false; track.classList.remove('dragging'); if (moved) goTo(current()); });
+    window.addEventListener('pointerup', () => { if (!down) return; down = false; track.classList.remove('dragging'); if (moved) goTo(current()); if (loop) settle(); });
     track.addEventListener('click', e => { if (moved) { e.preventDefault(); moved = false; } }, true);
+    if (loop) toMiddle(0);
     render(); parallax();
-    addEventListener('resize', () => { render(); parallax(); }, { passive: true });
-    mqRev.addEventListener?.('change', () => { track.scrollLeft = 0; active = -1; render(); parallax(); });
+    addEventListener('resize', () => { if (loop) toMiddle(current()); render(); parallax(); }, { passive: true });
+    mqRev.addEventListener?.('change', () => { active = -1; if (loop) toMiddle(0); else track.scrollLeft = 0; render(); parallax(); });
   };
   $$('[data-gallery]').forEach(initGallery);
 
