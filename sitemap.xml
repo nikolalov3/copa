@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://www.coppaspecialty.cafe/</loc>
-    <lastmod>2026-10-08</lastmod>
+    <lastmod>2026-10-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="pl" href="https://www.coppaspecialty.cafe/"/>
@@ -16,10 +16,11 @@
     <image:image><image:loc>https://www.coppaspecialty.cafe/img/tiramisu/brzoskwinia-tymianek-1080.webp</image:loc><image:title>Tiramisu białe brzoskwinie i tymianek cytrynowy, COPPA Kraków</image:title></image:image>
     <image:image><image:loc>https://www.coppaspecialty.cafe/img/tiramisu/pralina-1080.webp</image:loc><image:title>Tiramisu pralina z orzecha laskowego, COPPA Kraków</image:title></image:image>
     <image:image><image:loc>https://www.coppaspecialty.cafe/img/tiramisu/matcha-malina-1080.webp</image:loc><image:title>Tiramisu matcha i malina, COPPA Kraków</image:title></image:image>
+    <image:image><image:loc>https://www.coppaspecialty.cafe/img/tiramisu/sliwka-kruszonka-1080.webp</image:loc><image:title>Tiramisu śliwka z kruszonką, COPPA Kraków</image:title></image:image>
   </url>
   <url>
     <loc>https://www.coppaspecialty.cafe/en/</loc>
-    <lastmod>2026-10-08</lastmod>
+    <lastmod>2026-10-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="pl" href="https://www.coppaspecialty.cafe/"/>
@@ -33,5 +34,6 @@
     <image:image><image:loc>https://www.coppaspecialty.cafe/img/tiramisu/brzoskwinia-tymianek-1080.webp</image:loc><image:title>Tiramisu białe brzoskwinie i tymianek cytrynowy, COPPA Kraków</image:title></image:image>
     <image:image><image:loc>https://www.coppaspecialty.cafe/img/tiramisu/pralina-1080.webp</image:loc><image:title>Tiramisu pralina z orzecha laskowego, COPPA Kraków</image:title></image:image>
     <image:image><image:loc>https://www.coppaspecialty.cafe/img/tiramisu/matcha-malina-1080.webp</image:loc><image:title>Tiramisu matcha i malina, COPPA Kraków</image:title></image:image>
+    <image:image><image:loc>https://www.coppaspecialty.cafe/img/tiramisu/sliwka-kruszonka-1080.webp</image:loc><image:title>Tiramisu śliwka z kruszonką, COPPA Kraków</image:title></image:image>
   </url>
 </urlset>
