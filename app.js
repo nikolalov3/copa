@@ -10,71 +10,50 @@
     if (img.complete && img.naturalWidth) on(); else { img.addEventListener('load', on, { once: true }); img.addEventListener('error', on, { once: true }); }
   });
 
-  /* 1. Galerie poziome (tiramisu, kanapki): scroll-snap + licznik + pasek + strzałki + drag myszą + paralaksa */
+  /* 1. Galerie poziome (tiramisu, jesień, kanapki): scroll-snap + licznik + pasek + strzałki + drag myszą + paralaksa.
+     Na telefonie (do 759 px): galeria jesienna lustrzana (data-rev), tiramisu i jesień w nieskończonej pętli (data-loop).
+     Na komputerze: zwykłe galerie od lewej, z początkiem i końcem. */
+  const mqMob = matchMedia('(max-width: 759px)');
   const initGallery = root => {
     const track = root.querySelector('.gal-track');
     if (!track) return;
-    let slides = [...track.querySelectorAll('.slide')];
-    const n = slides.length;
-    /* pętla (data-loop): trzy zestawy kart [kopia][oryginał][kopia]; start w środku,
-       po zatrzymaniu przewijania niewidoczny przeskok z kopii brzegowej do środka.
-       Kopie używają tych samych plików (cache przeglądarki), są ukryte przed czytnikami i klawiaturą. */
-    const loop = root.hasAttribute('data-loop') && n > 1;
-    if (loop) {
-      const mk = () => {
-        const fr = document.createDocumentFragment();
-        slides.forEach(s => {
-          const c = s.cloneNode(true);
-          c.setAttribute('aria-hidden', 'true'); c.inert = true; c.dataset.clone = '1';
-          c.querySelectorAll('img').forEach(im => {
-            im.classList.remove('ld');
-            const on = () => im.classList.add('ld');
-            if (im.complete && im.naturalWidth) on(); else { im.addEventListener('load', on, { once: true }); im.addEventListener('error', on, { once: true }); }
-          });
-          fr.appendChild(c);
-        });
-        return fr;
-      };
-      track.insertBefore(mk(), slides[0]);
-      track.appendChild(mk());
-      slides = [...track.querySelectorAll('.slide')];
-    }
-    const imgs   = slides.map(s => s.querySelector('img'));
-    const idxEl  = root.querySelector('.gal-idx'), totEl = root.querySelector('.gal-total'), fill = root.querySelector('.gal-fill');
-    const prev   = root.querySelector('.gal-prev'), next = root.querySelector('.gal-next');
-    const pad2   = k => String(k).padStart(2, '0');
-    const N = slides.length;
-    let active = -1;
+    const originals = [...track.querySelectorAll('.slide')];
+    const n = originals.length;
+    let slides = originals, imgs = slides.map(s => s.querySelector('img'));
+    const idxEl = root.querySelector('.gal-idx'), totEl = root.querySelector('.gal-total'), fill = root.querySelector('.gal-fill');
+    const prev  = root.querySelector('.gal-prev'), next = root.querySelector('.gal-next');
+    const pad2  = k => String(k).padStart(2, '0');
+    const wantsLoop = root.hasAttribute('data-loop') && n > 1;
+    let loop = false, active = -1;
     if (totEl) totEl.textContent = pad2(n);
-    /* galeria lustrzana (data-rev): tor w kierunku rtl, przeglądarka liczy scrollLeft ujemnie, więc pracujemy na odległości od startu */
-    /* lustro tylko na telefonie; na desktopie galeria idzie od lewej, żeby mrożone były pierwsze także od lewej */
-    const mqRev = matchMedia('(max-width: 759px)');
-    const isRev = () => root.hasAttribute('data-rev') && mqRev.matches;
-    const sg = () => (isRev() ? -1 : 1);
-    const pos = () => Math.abs(track.scrollLeft);
-    const padLeft   = () => parseFloat(getComputedStyle(track)[isRev() ? 'paddingRight' : 'paddingLeft']) || 0;
-    const edge = s => (isRev() ? track.clientWidth - s.offsetLeft - s.offsetWidth : s.offsetLeft);
+
+    const isRev   = () => root.hasAttribute('data-rev') && mqMob.matches;
+    const sg      = () => (isRev() ? -1 : 1);
+    const pos     = () => Math.abs(track.scrollLeft);
+    const setPos  = x => { track.scrollLeft = sg() * x; };
+    const padLeft = () => parseFloat(getComputedStyle(track)[isRev() ? 'paddingRight' : 'paddingLeft']) || 0;
+    const edge    = s => (isRev() ? track.clientWidth - s.offsetLeft - s.offsetWidth : s.offsetLeft);
     const maxScroll = () => Math.max(0, track.scrollWidth - track.clientWidth);
-    const step = () => (slides[1] ? Math.abs(edge(slides[1]) - edge(slides[0])) : slides[0].offsetWidth);
-    const setW = () => edge(slides[n]) - edge(slides[0]);
-    /* koniec toru = ostatnia pozycja dociągnięcia (na desktopie ostatnie karty nie dojeżdżają do lewej krawędzi) */
-    const endX = () => Math.min(maxScroll(), edge(slides[N - 1]) - padLeft());
+    const step    = () => (slides[1] ? Math.abs(edge(slides[1]) - edge(slides[0])) : slides[0].offsetWidth);
+    const setW    = () => edge(slides[n]) - edge(slides[0]);
+    const endX    = () => Math.min(maxScroll(), edge(slides[slides.length - 1]) - padLeft());
     const current = () => {
       const sl = pos();
-      if (!loop && sl >= endX() - 1) return N - 1;
+      if (!loop && sl >= endX() - 1) return slides.length - 1;
       const x = sl + padLeft();
       let best = 0, bd = Infinity;
       slides.forEach((s, i) => { const d = Math.abs(edge(s) - x); if (d < bd) { bd = d; best = i; } });
       return best;
     };
     const render = () => {
-      const mx = endX(), sl = pos();
       if (loop) {
         const i = current() % n;
         if (i !== active) { active = i; if (idxEl) idxEl.textContent = pad2(i + 1); }
         if (fill) fill.style.transform = `scaleX(${(i + 1) / n})`;
+        prev?.removeAttribute('disabled'); next?.removeAttribute('disabled');
         return;
       }
+      const mx = endX(), sl = pos();
       root.classList.toggle('no-scroll', mx <= 4);
       const i = mx <= 4 ? 0 : current();
       if (i !== active) { active = i; if (idxEl) idxEl.textContent = pad2(i + 1); }
@@ -83,7 +62,7 @@
       next && next.toggleAttribute('disabled', sl >= mx - 1);
     };
     const scrollToX = x => track.scrollTo({ left: sg() * Math.max(0, Math.min(maxScroll(), x)), behavior: reduce ? 'auto' : 'smooth' });
-    const goTo = i => scrollToX(edge(slides[Math.max(0, Math.min(N - 1, i))]) - padLeft());
+    const goTo = i => scrollToX(edge(slides[Math.max(0, Math.min(slides.length - 1, i))]) - padLeft());
     const by   = dir => scrollToX(pos() + dir * step());
     const parallax = () => {
       if (reduce) return;
@@ -95,9 +74,40 @@
         imgs[i].style.transform = `translateX(${(-d * 5).toFixed(2)}%) scale(1.06)`;
       });
     };
-    let raf = 0, idle = 0, touching = false, down = false;
-    const setPos = x => { track.scrollLeft = sg() * x; };
+
+    /* pętla: kopie zestawu przed i za oryginałem (te same pliki z cache), ukryte przed czytnikami i klawiaturą */
+    const cloneSet = () => {
+      const fr = document.createDocumentFragment();
+      originals.forEach(s => {
+        const c = s.cloneNode(true);
+        c.setAttribute('aria-hidden', 'true'); c.inert = true; c.dataset.clone = '1';
+        c.querySelectorAll('img').forEach(im => {
+          im.classList.remove('ld');
+          const on = () => im.classList.add('ld');
+          if (im.complete && im.naturalWidth) on(); else { im.addEventListener('load', on, { once: true }); im.addEventListener('error', on, { once: true }); }
+        });
+        fr.appendChild(c);
+      });
+      return fr;
+    };
     const toMiddle = i => setPos(edge(slides[n + (((i % n) + n) % n)]) - padLeft());
+    const applyMode = () => {
+      const keep = ((loop ? current() : current()) % n + n) % n;
+      const shouldLoop = wantsLoop && mqMob.matches;
+      if (shouldLoop && !loop) {
+        track.insertBefore(cloneSet(), originals[0]); track.appendChild(cloneSet());
+        slides = [...track.querySelectorAll('.slide')]; loop = true;
+      } else if (!shouldLoop && loop) {
+        track.querySelectorAll('.slide[data-clone]').forEach(c => c.remove());
+        slides = originals; loop = false;
+      }
+      imgs = slides.map(s => s.querySelector('img'));
+      active = -1;
+      if (loop) toMiddle(keep); else setPos(0);
+      render(); parallax();
+    };
+
+    let raf = 0, idle = 0, touching = false, down = false;
     const recenter = () => {
       if (!loop || touching || down) return;
       const i = current();
@@ -109,7 +119,7 @@
       cancelAnimationFrame(raf); raf = requestAnimationFrame(() => { render(); parallax(); });
       if (loop) settle();
     }, { passive: true });
-    if (loop) {
+    if (wantsLoop) {
       if ('onscrollend' in window) track.addEventListener('scrollend', recenter);
       track.addEventListener('touchstart', () => { touching = true; clearTimeout(idle); }, { passive: true });
       track.addEventListener('touchend', () => { touching = false; settle(); }, { passive: true });
@@ -126,10 +136,10 @@
     window.addEventListener('pointermove', e => { if (!down) return; const dx = e.clientX - sx; if (Math.abs(dx) > 4) moved = true; track.scrollLeft = sg() * Math.max(0, sl0 - sg() * dx); });
     window.addEventListener('pointerup', () => { if (!down) return; down = false; track.classList.remove('dragging'); if (moved) goTo(current()); if (loop) settle(); });
     track.addEventListener('click', e => { if (moved) { e.preventDefault(); moved = false; } }, true);
-    if (loop) toMiddle(0);
-    render(); parallax();
+
+    applyMode();
     addEventListener('resize', () => { if (loop) toMiddle(current()); render(); parallax(); }, { passive: true });
-    mqRev.addEventListener?.('change', () => { active = -1; if (loop) toMiddle(0); else track.scrollLeft = 0; render(); parallax(); });
+    mqMob.addEventListener?.('change', applyMode);
   };
   $$('[data-gallery]').forEach(initGallery);
 
