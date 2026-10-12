@@ -25,6 +25,9 @@
     <image:image><image:loc>https://www.coppaspecialty.cafe/img/menu/berry-cocoa.webp</image:loc><image:title>Berry Cocoa, COPPA Kraków</image:title></image:image>
     <image:image><image:loc>https://www.coppaspecialty.cafe/img/menu/dark-chocolate-mocha.webp</image:loc><image:title>Dark Chocolate Mocha, COPPA Kraków</image:title></image:image>
     <image:image><image:loc>https://www.coppaspecialty.cafe/img/menu/oat-cinnamon-hojicha.webp</image:loc><image:title>Oat Cinnamon Hojicha, COPPA Kraków</image:title></image:image>
+    <image:image><image:loc>https://www.coppaspecialty.cafe/img/kanapki/salami-piccante-1080.webp</image:loc><image:title>Kanapka salami piccante, COPPA Kraków</image:title></image:image>
+    <image:image><image:loc>https://www.coppaspecialty.cafe/img/kanapki/wege-1080.webp</image:loc><image:title>Kanapka wege, COPPA Kraków</image:title></image:image>
+    <image:image><image:loc>https://www.coppaspecialty.cafe/img/kanapki/mortadela-1080.webp</image:loc><image:title>Kanapka z mortadelą, COPPA Kraków</image:title></image:image>
   </url>
   <url>
     <loc>https://www.coppaspecialty.cafe/en/</loc>
@@ -51,5 +54,8 @@
     <image:image><image:loc>https://www.coppaspecialty.cafe/img/menu/berry-cocoa.webp</image:loc><image:title>Berry Cocoa, COPPA Kraków</image:title></image:image>
     <image:image><image:loc>https://www.coppaspecialty.cafe/img/menu/dark-chocolate-mocha.webp</image:loc><image:title>Dark Chocolate Mocha, COPPA Kraków</image:title></image:image>
     <image:image><image:loc>https://www.coppaspecialty.cafe/img/menu/oat-cinnamon-hojicha.webp</image:loc><image:title>Oat Cinnamon Hojicha, COPPA Kraków</image:title></image:image>
+    <image:image><image:loc>https://www.coppaspecialty.cafe/img/kanapki/salami-piccante-1080.webp</image:loc><image:title>Kanapka salami piccante, COPPA Kraków</image:title></image:image>
+    <image:image><image:loc>https://www.coppaspecialty.cafe/img/kanapki/wege-1080.webp</image:loc><image:title>Kanapka wege, COPPA Kraków</image:title></image:image>
+    <image:image><image:loc>https://www.coppaspecialty.cafe/img/kanapki/mortadela-1080.webp</image:loc><image:title>Kanapka z mortadelą, COPPA Kraków</image:title></image:image>
   </url>
 </urlset>

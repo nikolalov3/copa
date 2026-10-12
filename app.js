@@ -10,26 +10,23 @@
     if (img.complete && img.naturalWidth) on(); else { img.addEventListener('load', on, { once: true }); img.addEventListener('error', on, { once: true }); }
   });
 
-  /* 1. Galeria tiramisu: scroll-snap + licznik + pasek postępu + strzałki + drag myszą + lekka paralaksa */
-  const track = $('#galTrack');
-  if (track) {
-    const slides = $$('.slide', track);
+  /* 1. Galerie poziome (tiramisu, kanapki): scroll-snap + licznik + pasek + strzałki + drag myszą + paralaksa */
+  const initGallery = root => {
+    const track = root.querySelector('.gal-track');
+    if (!track) return;
+    const slides = [...track.querySelectorAll('.slide')];
     const imgs   = slides.map(s => s.querySelector('img'));
-    const idxEl  = $('#galIdx'), totEl = $('#galTotal'), fill = $('#galFill');
-    const prev   = $('#galPrev'), next = $('#galNext');
+    const idxEl  = root.querySelector('.gal-idx'), totEl = root.querySelector('.gal-total'), fill = root.querySelector('.gal-fill');
+    const prev   = root.querySelector('.gal-prev'), next = root.querySelector('.gal-next');
     const pad2   = n => String(n).padStart(2, '0');
     const n = slides.length;
     let active = -1;
     if (totEl) totEl.textContent = pad2(n);
-
-    const padLeft  = () => parseFloat(getComputedStyle(track).paddingLeft) || 0;
+    const padLeft   = () => parseFloat(getComputedStyle(track).paddingLeft) || 0;
     const maxScroll = () => Math.max(0, track.scrollWidth - track.clientWidth);
     const step = () => (slides[1] ? slides[1].offsetLeft - slides[0].offsetLeft : slides[0].offsetWidth);
-    /* koniec = ostatnia pozycja dociągnięcia (na mobile tor ma jeszcze kilkanaście px luzu po ostatniej karcie) */
+    /* koniec toru = ostatnia pozycja dociągnięcia (na desktopie ostatnie karty nie dojeżdżają do lewej krawędzi) */
     const endX = () => Math.min(maxScroll(), slides[n - 1].offsetLeft - padLeft());
-
-    /* która karta jest „bieżąca”: najbliższa lewej krawędzi, a na samym końcu zawsze ostatnia
-       (na desktopie widać kilka kart naraz, więc ostatnie nigdy nie dojeżdżają do lewej krawędzi) */
     const current = () => {
       const sl = track.scrollLeft;
       if (sl >= endX() - 1) return n - 1;
@@ -39,30 +36,29 @@
       return best;
     };
     const render = () => {
-      const i = current(), sl = track.scrollLeft, mx = endX();
+      const mx = endX(), sl = track.scrollLeft;
+      root.classList.toggle('no-scroll', mx <= 4);
+      const i = mx <= 4 ? 0 : current();
       if (i !== active) { active = i; if (idxEl) idxEl.textContent = pad2(i + 1); }
-      if (fill) fill.style.transform = `scaleX(${mx ? Math.min(1, sl / mx) : 1})`;
+      if (fill) fill.style.transform = `scaleX(${mx > 4 ? Math.min(1, sl / mx) : 1})`;
       prev && prev.toggleAttribute('disabled', sl <= 1);
       next && next.toggleAttribute('disabled', sl >= mx - 1);
     };
     const scrollToX = x => track.scrollTo({ left: Math.max(0, Math.min(maxScroll(), x)), behavior: reduce ? 'auto' : 'smooth' });
     const goTo = i => scrollToX(slides[Math.max(0, Math.min(n - 1, i))].offsetLeft - padLeft());
     const by   = dir => scrollToX(track.scrollLeft + dir * step());
-
     const parallax = () => {
       if (reduce) return;
       const vw = track.clientWidth, sl = track.scrollLeft;
       slides.forEach((s, i) => {
+        if (!imgs[i]) return;
         const c = s.offsetLeft + s.offsetWidth / 2 - sl - vw / 2;
         const d = Math.max(-1, Math.min(1, c / vw));
         imgs[i].style.transform = `translateX(${(-d * 5).toFixed(2)}%) scale(1.06)`;
       });
     };
     let raf = 0;
-    track.addEventListener('scroll', () => {
-      cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(() => { render(); parallax(); });
-    }, { passive: true });
+    track.addEventListener('scroll', () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(() => { render(); parallax(); }); }, { passive: true });
     prev?.addEventListener('click', () => by(-1));
     next?.addEventListener('click', () => by(1));
     track.addEventListener('keydown', e => {
@@ -76,7 +72,8 @@
     track.addEventListener('click', e => { if (moved) { e.preventDefault(); moved = false; } }, true);
     render(); parallax();
     addEventListener('resize', () => { render(); parallax(); }, { passive: true });
-  }
+  };
+  $$('[data-gallery]').forEach(initGallery);
 
   /* 2. „Otwarte do …” w strefie Europe/Warsaw + dzisiejszy wiersz w tabeli godzin */
   const HOURS = { 0: [9.5, 18], 1: [8, 19], 2: [8, 19], 3: [8, 19], 4: [8, 19], 5: [8, 19], 6: [9.5, 18] };
