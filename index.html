@@ -139,7 +139,7 @@
     <a href="#na-miejscu">Na miejscu</a>
     <a href="#kontakt">Kontakt</a>
   </nav>
-  <a class="lang" href="en/" hreflang="en" lang="en" aria-label="English version">EN</a>
+  <a class="lang" data-toodip="main_lang" href="en/" hreflang="en" lang="en" aria-label="English version">EN</a>
   <div class="open-pill" id="openPill"><span class="dot" aria-hidden="true"></span><span id="openText">pon-pt 8:00-19:00</span></div>
 </header>
 
@@ -151,8 +151,8 @@
     <h1>Tiramisu w pucharku.<br>Kawa specialty.</h1>
     <p class="lead">COPPA to kawiarnia specialty i tiramisu bar na Krowodrzy. Tiramisu robimy sami, codziennie, i podajemy w pucharku. Klasyczne i pistacjowe są zawsze, reszta zmienia się z sezonem.</p>
     <div class="cta-row">
-      <a class="btn btn-fill" href="#tiramisu">Zobacz tiramisu</a>
-      <a class="btn btn-ghost" href="#kontakt">Dojazd</a>
+      <a class="btn btn-fill" href="#tiramisu" data-toodip="main_tiramisu_cta">Zobacz tiramisu</a>
+      <a class="btn btn-ghost" href="#kontakt" data-toodip="main_dojazd_cta">Dojazd</a>
     </div>
   </div>
   <figure class="hero-fig" data-alts="[{&quot;src&quot;: &quot;img/hero/alt2&quot;, &quot;alt&quot;: &quot;Za barem w COPPIE przy Mazowieckiej 60&quot;}, {&quot;src&quot;: &quot;img/hero/alt3&quot;, &quot;alt&quot;: &quot;Za barem w COPPIE przy Mazowieckiej 60&quot;}, {&quot;src&quot;: &quot;img/hero/alt4&quot;, &quot;alt&quot;: &quot;Za barem w COPPIE przy Mazowieckiej 60&quot;}, {&quot;src&quot;: &quot;img/hero/alt5&quot;, &quot;alt&quot;: &quot;Za barem w COPPIE przy Mazowieckiej 60&quot;}]">
@@ -564,8 +564,8 @@
       <h2>Mazowiecka 60,<br>Kraków.</h2>
       <p class="visit-sub">Krowodrza, 30-019. Wejście od ulicy, w sezonie ogródek przed lokalem.</p>
       <div class="cta-row">
-        <a class="btn btn-fill" href="https://www.google.com/maps/search/?api=1&query=COPPA+Specialty+Coffee+Tiramisu+Mazowiecka+60+Krak%C3%B3w" rel="noopener">Google Maps</a>
-        <a class="btn btn-ghost" href="https://maps.apple.com/?q=COPPA+Mazowiecka+60+Krak%C3%B3w&ll=50.0755,19.9236" rel="noopener">Apple Maps</a>
+        <a class="btn btn-fill" href="https://www.google.com/maps/search/?api=1&query=COPPA+Specialty+Coffee+Tiramisu+Mazowiecka+60+Krak%C3%B3w" rel="noopener" data-toodip="main_google_maps">Google Maps</a>
+        <a class="btn btn-ghost" href="https://maps.apple.com/?q=COPPA+Mazowiecka+60+Krak%C3%B3w&ll=50.0755,19.9236" rel="noopener" data-toodip="main_apple_maps">Apple Maps</a>
       </div>
     </div>
     <div class="hours rv">
@@ -619,5 +619,23 @@
 </nav>
 
 <script src="app.js" defer></script>
+<script>
+/* statystyki strony głównej (toodip stats): kliknięcia w kluczowe przyciski i dojście do sekcji, jedno zdarzenie na sekcję na odsłonę */
+(function () {
+  function send(n) { window.toodip && window.toodip(n); }
+  var w = document.getElementById('wifiCopy'); if (w) w.addEventListener('click', function () { send('main_wifi'); });
+  addEventListener('load', function () {
+    if (!('IntersectionObserver' in window)) return;
+    var seen = {};
+    var io = new IntersectionObserver(function (es) { es.forEach(function (e) {
+      var id = e.target.id;
+      if (e.isIntersecting && !seen[id]) { seen[id] = 1; send('main_see_' + id); io.unobserve(e.target); }
+    }); }, { threshold: 0.25 });
+    document.querySelectorAll('main section[id]').forEach(function (el) { io.observe(el); });
+  });
+})();
+</script>
+<script defer src="https://stats.toodip.com/s.js" data-id="22ae417e-a9ca-4837-a406-ca667fc24079"></script>
+
 </body>
 </html>
