@@ -23,10 +23,13 @@
     let active = -1;
     if (totEl) totEl.textContent = pad2(n);
     /* galeria lustrzana (data-rev): tor w kierunku rtl, przeglądarka liczy scrollLeft ujemnie, więc pracujemy na odległości od startu */
-    const rev = root.hasAttribute('data-rev'), sgn = rev ? -1 : 1;
+    /* lustro tylko na telefonie; na desktopie galeria idzie od lewej, żeby mrożone były pierwsze także od lewej */
+    const mqRev = matchMedia('(max-width: 759px)');
+    const isRev = () => root.hasAttribute('data-rev') && mqRev.matches;
+    const sg = () => (isRev() ? -1 : 1);
     const pos = () => Math.abs(track.scrollLeft);
-    const padLeft   = () => parseFloat(getComputedStyle(track)[rev ? 'paddingRight' : 'paddingLeft']) || 0;
-    const edge = s => (rev ? track.clientWidth - s.offsetLeft - s.offsetWidth : s.offsetLeft);
+    const padLeft   = () => parseFloat(getComputedStyle(track)[isRev() ? 'paddingRight' : 'paddingLeft']) || 0;
+    const edge = s => (isRev() ? track.clientWidth - s.offsetLeft - s.offsetWidth : s.offsetLeft);
     const maxScroll = () => Math.max(0, track.scrollWidth - track.clientWidth);
     const step = () => (slides[1] ? Math.abs(edge(slides[1]) - edge(slides[0])) : slides[0].offsetWidth);
     /* koniec toru = ostatnia pozycja dociągnięcia (na desktopie ostatnie karty nie dojeżdżają do lewej krawędzi) */
@@ -48,7 +51,7 @@
       prev && prev.toggleAttribute('disabled', sl <= 1);
       next && next.toggleAttribute('disabled', sl >= mx - 1);
     };
-    const scrollToX = x => track.scrollTo({ left: sgn * Math.max(0, Math.min(maxScroll(), x)), behavior: reduce ? 'auto' : 'smooth' });
+    const scrollToX = x => track.scrollTo({ left: sg() * Math.max(0, Math.min(maxScroll(), x)), behavior: reduce ? 'auto' : 'smooth' });
     const goTo = i => scrollToX(edge(slides[Math.max(0, Math.min(n - 1, i))]) - padLeft());
     const by   = dir => scrollToX(pos() + dir * step());
     const parallax = () => {
@@ -66,16 +69,17 @@
     prev?.addEventListener('click', () => by(-1));
     next?.addEventListener('click', () => by(1));
     track.addEventListener('keydown', e => {
-      if (e.key === 'ArrowRight') { e.preventDefault(); by(sgn); }
-      if (e.key === 'ArrowLeft')  { e.preventDefault(); by(-sgn); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); by(sg()); }
+      if (e.key === 'ArrowLeft')  { e.preventDefault(); by(-sg()); }
     });
     let down = false, sx = 0, sl0 = 0, moved = false;
     track.addEventListener('pointerdown', e => { if (e.pointerType !== 'mouse') return; down = true; moved = false; sx = e.clientX; sl0 = pos(); track.classList.add('dragging'); });
-    window.addEventListener('pointermove', e => { if (!down) return; const dx = e.clientX - sx; if (Math.abs(dx) > 4) moved = true; track.scrollLeft = sgn * Math.max(0, sl0 - sgn * dx); });
+    window.addEventListener('pointermove', e => { if (!down) return; const dx = e.clientX - sx; if (Math.abs(dx) > 4) moved = true; track.scrollLeft = sg() * Math.max(0, sl0 - sg() * dx); });
     window.addEventListener('pointerup', () => { if (!down) return; down = false; track.classList.remove('dragging'); if (moved) goTo(current()); });
     track.addEventListener('click', e => { if (moved) { e.preventDefault(); moved = false; } }, true);
     render(); parallax();
     addEventListener('resize', () => { render(); parallax(); }, { passive: true });
+    mqRev.addEventListener?.('change', () => { track.scrollLeft = 0; active = -1; render(); parallax(); });
   };
   $$('[data-gallery]').forEach(initGallery);
 

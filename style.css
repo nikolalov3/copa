@@ -93,12 +93,8 @@ h3{font-size:1.15rem;font-weight:500;letter-spacing:-.01em}
 .slide-cap p{margin-top:10px;color:var(--ink-2);font-size:.93rem;line-height:1.6;max-width:40ch}
 .tags{font-size:.82rem!important;color:var(--rose)!important;margin-top:12px!important}
 .gal-bar{height:1px;background:var(--line);margin-top:28px;position:relative}
-.rev .gal-track{direction:rtl}
-.rev .slide{direction:ltr}
-.rev .gal-ui{flex-direction:row-reverse}
 .gal.rev{padding-top:56px}
 .gal-bar span{position:absolute;left:0;top:0;height:100%;width:100%;background:var(--ink);transform-origin:left;transform:scaleX(.125);transition:transform .5s var(--ease)}
-.rev .gal-bar span{transform-origin:right}
 
 /* miejsce */
 .story{padding:96px 0 24px;display:grid;gap:36px}
@@ -244,3 +240,15 @@ img[data-fade].ld{opacity:1}
 }
 @media (hover:none){.gal-arrows{display:none}.gal-track{cursor:auto}}
 
+
+/* galeria jesienna: lustro (start od prawej, przesuwanie w prawo) tylko na telefonie */
+@media (max-width:759px){
+  .rev .gal-track{direction:rtl}
+  .rev .slide{direction:ltr}
+  .rev .gal-ui{flex-direction:row-reverse}
+  .rev .gal-bar span{transform-origin:right}
+}
+@media (min-width:760px){
+  .rev .gal-arrows{flex-direction:row-reverse}
+  .rev .gal-arrows svg{transform:scaleX(-1)}
+}
