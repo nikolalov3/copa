@@ -5,36 +5,51 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>COPPA · Przy stoliku</title>
 <meta name="description" content="Tiramisu, menu, opinie i WiFi. COPPA Specialty Coffee &amp; Tiramisu, Mazowiecka 60, Kraków.">
-<!-- strona z kodów QR na stolikach i przy kasie: nie indeksujemy, żeby nie dublowała strony głównej -->
+<!-- strona z kodów QR na stolikach i przy kasie: nie indeksujemy, żeby nie dublowała strony głównej. Plik generowany: scripts/klienci/coppa/gen_qr_pages.py -->
 <meta name="robots" content="noindex,follow">
 <meta name="theme-color" content="#F6F2EB">
 <meta name="color-scheme" content="light">
+<script>
+/* test A/B: losowy wariant na gościa, zapamiętany w przeglądarce; podgląd ?ab=a lub ?ab=b */
+(function () { var v; try { v = localStorage.getItem('coppaAB'); } catch (e) {}
+  if (v !== 'a' && v !== 'b') { v = Math.random() < 0.5 ? 'a' : 'b'; try { localStorage.setItem('coppaAB', v); } catch (e) {} }
+  var q = new URLSearchParams(location.search).get('ab'); if (q === 'a' || q === 'b') v = q;
+  document.documentElement.setAttribute('data-ab', v); })();
+</script>
 <link rel="icon" href="../favicon.ico" sizes="any">
 <link rel="icon" href="../img/icon-180.png" type="image/png">
 <link rel="apple-touch-icon" href="../img/icon-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="../img/tiramisu/klasyczne-1080.webp" type="image/webp">
 <link rel="stylesheet" href="../style.css">
 <style>
   .qr-page{width:min(100% - var(--gutter)*2,560px);margin-inline:auto;padding:16px 0 56px}
   .topbar .lang{margin-left:auto}
+  /* warianty: bez JS widać B */
+  .hero-a{display:none} html[data-ab="a"] .hero-a{display:block} html[data-ab="a"] .hero-b{display:none}
 
-  /* 1. zdjęcie z zachętą */
+  /* B: jedno duże zdjęcie */
   .qr-hero{position:relative;margin-inline:calc(var(--gutter) * -1);aspect-ratio:4/5;overflow:hidden;border-radius:0 0 28px 28px;background:var(--sage-soft)}
   .qr-hero img{width:100%;height:100%;object-fit:cover;object-position:50% 58%}
+  /* A: mniejsza przewijana galeria tiramisu */
+  .qr-gal{padding-top:12px}
+  .qr-gal .gal-track{--card:min(46vw,210px);gap:10px;margin-inline:calc(50% - 50vw);padding-inline:calc(50vw - 50%);scroll-padding-inline:max(var(--gutter),calc((100% - 560px) / 2))}
+  .qr-gal .slide{display:block}
+  .qr-gal .slide-fig{border-radius:16px}
+  .qr-gal .slide b{display:block;margin-top:8px;font-weight:500;font-size:.95rem;letter-spacing:-.01em}
+  .qr-gal .slide span{display:block;font-size:.78rem;color:var(--rose);margin-top:1px}
+  .qr-gal .gal-bar{margin-top:16px}
+
   .qr-hero-copy{margin-top:24px}
   .qr-hero-copy h1{font-size:clamp(2rem,8.6vw,2.9rem);line-height:1.06;max-width:15ch}
   .qr-hero-copy p{margin-top:12px;font-size:1rem;line-height:1.6;color:var(--ink-2);max-width:38ch}
   .qr-hero-copy .btn{margin-top:18px;height:50px}
 
-  /* bloki */
   .qr-block{margin-top:44px}
   .qr-block > h2{font-size:1.55rem;max-width:none}
   .qr-sub{margin-top:6px;color:var(--ink-2);font-size:.95rem;line-height:1.55}
 
-  /* 2. para na dziś */
   .pair{margin-top:16px;border-radius:24px;background:var(--paper-2);padding:12px 12px 18px}
   .pair-imgs{display:grid;grid-template-columns:1fr 1fr;gap:10px}
   .pair-imgs a{display:block;border-radius:16px;overflow:hidden;aspect-ratio:3/4;background:var(--sage-soft)}
@@ -46,22 +61,32 @@
   .pair-cta{display:flex;gap:8px;flex-wrap:wrap;margin:14px 6px 0}
   .pair-cta .btn{height:42px;font-size:.88rem;padding:0 18px}
 
-  /* 3. menu */
   .qr-links{display:grid;gap:10px;margin-top:16px}
-  .qr-link{display:grid;grid-template-columns:64px 1fr auto;align-items:center;gap:16px;padding:10px 14px 10px 10px;border-radius:18px;background:var(--paper-2);transition:background .2s}
+  .qr-link{position:relative;overflow:hidden;display:grid;grid-template-columns:64px 1fr auto;align-items:center;gap:16px;padding:10px 14px 10px 10px;border-radius:18px;background:var(--paper-2);transition:background .2s}
   .qr-link:hover{background:#E9E2D6}
-  .qr-link img,.qr-link .qr-ico{width:64px;height:64px;border-radius:12px;object-fit:cover;background:var(--sage-soft)}
-  .qr-link .qr-ico{display:grid;place-items:center;font-family:var(--board);font-weight:800;font-size:1.05rem;color:var(--ink);background:var(--paper)}
+  .qr-link > *{position:relative;z-index:2}
+  .qr-link img{width:64px;height:64px;border-radius:12px;object-fit:cover;background:var(--sage-soft)}
   .qr-link b{display:block;font-weight:500;font-size:1.05rem;letter-spacing:-.01em}
   .qr-link span{display:block;font-size:.88rem;color:var(--ink-2);margin-top:2px}
   .qr-link .go{font-size:1.3rem;color:var(--mist)}
+  /* jesienne menu: ciepłe tło, lśnienie i opadające liście */
+  .qr-link.autumn{background:linear-gradient(120deg,#F6E6C9 0%,#F0CF9C 55%,#E9BB86 100%)}
+  .qr-link.autumn b{color:#5A2E14} .qr-link.autumn span{color:#7A4A28} .qr-link.autumn .go{color:#9A5A2C}
+  .qr-link.autumn::after{content:"";position:absolute;inset:-40% -60%;z-index:1;pointer-events:none;background:linear-gradient(105deg,transparent 42%,rgba(255,250,235,.65) 50%,transparent 58%);transform:translateX(-60%);animation:shine 4.8s ease-in-out infinite}
+  @keyframes shine{0%,55%{transform:translateX(-60%)}100%{transform:translateX(60%)}}
+  .leaves{position:absolute;inset:0;z-index:1;pointer-events:none}
+  .leaves i{position:absolute;top:-18px;left:var(--x);width:calc(15px * var(--s));height:calc(15px * var(--s));background-size:contain;background-repeat:no-repeat;opacity:.75;animation:fall var(--d) linear infinite;animation-delay:var(--dl)}
+  @keyframes fall{0%{transform:translate(0,0) rotate(0deg)}25%{transform:translate(10px,30px) rotate(70deg)}50%{transform:translate(-6px,60px) rotate(150deg)}75%{transform:translate(8px,90px) rotate(230deg)}100%{transform:translate(-4px,120px) rotate(320deg)}}
+  .lf0{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23C8752F' d='M12%202c1%203%203%204%206%204-1%202-1%204%201%206-3%200-4%201-5%204-1-2-2-3-2-6-1%203-1%204-2%206-1-3-2-4-5-4%202-2%202-4%201-6%203%200%205-1%206-4z'/%3E%3C/svg%3E")}
+  .lf1{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23A9472A' d='M12%202c4%203%207%207%207%2011a7%207%200%200%201-14%200c0-4%203-8%207-11zm0%204v14'/%3E%3C/svg%3E")}
+  .lf2{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23D9A441' d='M12%202c1%203%203%204%206%204-1%202-1%204%201%206-3%200-4%201-5%204-1-2-2-3-2-6-1%203-1%204-2%206-1-3-2-4-5-4%202-2%202-4%201-6%203%200%205-1%206-4z'/%3E%3C/svg%3E")}
+  .lf3{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23B85C2E' d='M12%202c4%203%207%207%207%2011a7%207%200%200%201-14%200c0-4%203-8%207-11zm0%204v14'/%3E%3C/svg%3E")}
+  @media (prefers-reduced-motion:reduce){ .qr-link.autumn::after{animation:none;display:none} .leaves i{animation:none;top:auto;bottom:6px;opacity:.35} }
 
-  /* 4. opinie */
   .qr-reviews{display:grid;gap:10px;margin-top:16px}
   .qr-reviews .btn{width:100%;height:54px;font-size:.98rem}
   .qr-note{margin-top:12px;font-size:.85rem;color:var(--mist);line-height:1.55}
 
-  /* 5. WiFi na dole: miękka karta zamiast ostrej ramki */
   .qr-wifi{margin-top:44px;border-radius:24px;background:var(--sage-soft);padding:22px 22px 20px;display:grid;grid-template-columns:1fr auto;align-items:end;gap:6px 16px}
   .qr-wifi .lbl{grid-column:1/-1;font-size:.82rem;color:var(--ink-2)}
   .qr-wifi .net{grid-column:1/-1;font-size:.92rem;color:var(--ink-2)}
@@ -88,13 +113,54 @@
 <main class="qr-page">
 
   <section>
-    <div class="qr-hero">
-      <img src="../img/tiramisu/klasyczne-1080.webp" srcset="../img/tiramisu/klasyczne-640.webp 640w, ../img/tiramisu/klasyczne-1080.webp 1080w" sizes="(min-width:600px) 560px, 100vw" alt="Tiramisu klasyczne w pucharku" width="1080" height="1616" fetchpriority="high">
+    <div class="hero-a qr-gal" data-gallery data-loop>
+      <div class="gal-track" tabindex="0" aria-label="Nasze tiramisu. Przesuń w bok.">
+      <a class="slide" href="../#tiramisu" data-ev="gal_card">
+        <figure class="slide-fig"><img src="../img/tiramisu/klasyczne-640.webp" alt="Klasyczne" width="640" height="960" loading="lazy"></figure>
+        <b>Klasyczne</b><span>stałe</span>
+      </a>
+      <a class="slide" href="../#tiramisu" data-ev="gal_card">
+        <figure class="slide-fig"><img src="../img/tiramisu/pistacjowe-640.webp" alt="Pistacjowe" width="640" height="960" loading="lazy"></figure>
+        <b>Pistacjowe</b><span>stałe</span>
+      </a>
+      <a class="slide" href="../#tiramisu" data-ev="gal_card">
+        <figure class="slide-fig"><img src="../img/tiramisu/sliwka-kruszonka-640.webp" alt="Śliwka z kruszonką" width="640" height="960" loading="lazy"></figure>
+        <b>Śliwka z kruszonką</b><span>sezonowe</span>
+      </a>
+      <a class="slide" href="../#tiramisu" data-ev="gal_card">
+        <figure class="slide-fig"><img src="../img/tiramisu/earl-grey-640.webp" alt="Earl Grey" width="640" height="960" loading="lazy"></figure>
+        <b>Earl Grey</b><span>sezonowe</span>
+      </a>
+      <a class="slide" href="../#tiramisu" data-ev="gal_card">
+        <figure class="slide-fig"><img src="../img/tiramisu/hojicha-640.webp" alt="Hojicha" width="640" height="960" loading="lazy"></figure>
+        <b>Hojicha</b><span>sezonowe</span>
+      </a>
+      <a class="slide" href="../#tiramisu" data-ev="gal_card">
+        <figure class="slide-fig"><img src="../img/tiramisu/matcha-malina-640.webp" alt="Matcha i malina" width="640" height="960" loading="lazy"></figure>
+        <b>Matcha i malina</b><span>sezonowe</span>
+      </a>
+      <a class="slide" href="../#tiramisu" data-ev="gal_card">
+        <figure class="slide-fig"><img src="../img/tiramisu/limoncello-640.webp" alt="Limoncello" width="640" height="960" loading="lazy"></figure>
+        <b>Limoncello</b><span>sezonowe</span>
+      </a>
+      <a class="slide" href="../#tiramisu" data-ev="gal_card">
+        <figure class="slide-fig"><img src="../img/tiramisu/pralina-640.webp" alt="Pralina z orzecha" width="640" height="960" loading="lazy"></figure>
+        <b>Pralina z orzecha</b><span>sezonowe</span>
+      </a>
+      <a class="slide" href="../#tiramisu" data-ev="gal_card">
+        <figure class="slide-fig"><img src="../img/tiramisu/brzoskwinia-tymianek-640.webp" alt="Brzoskwinia i tymianek" width="640" height="960" loading="lazy"></figure>
+        <b>Brzoskwinia i tymianek</b><span>sezonowe</span>
+      </a>
+      </div>
+      <div class="gal-bar" aria-hidden="true"><span class="gal-fill"></span></div>
+    </div>
+    <div class="hero-b qr-hero">
+      <img src="../img/tiramisu/klasyczne-1080.webp" srcset="../img/tiramisu/klasyczne-640.webp 640w, ../img/tiramisu/klasyczne-1080.webp 1080w" sizes="(min-width:600px) 560px, 100vw" alt="Tiramisu klasyczne w pucharku" width="1080" height="1616" loading="lazy">
     </div>
     <div class="qr-hero-copy">
       <h1>Kawa już jest. Brakuje tylko łyżeczki tiramisu.</h1>
       <p>Robimy je codziennie, na miejscu, i podajemy w pucharku. Zapytaj przy barze, które smaki są dziś w gablocie.</p>
-      <a class="btn btn-fill" href="../#tiramisu">Zobacz tiramisu</a>
+      <a class="btn btn-fill" href="../#tiramisu" data-ev="tiramisu_cta">Zobacz tiramisu</a>
     </div>
   </section>
 
@@ -102,17 +168,16 @@
     <h2 id="pairH">Para na dziś</h2>
     <p class="qr-sub">Napój i deser, które dobrze się razem jedzą.</p>
     <div class="pair" id="pair">
-      <!-- domyślna para (gdy JS nie działa); skrypt na dole losuje jedną z czterech -->
       <div class="pair-imgs">
-        <a href="../#jesien"><img id="pairA" src="../img/jesien/iced-apple-pie-latte-640.webp" alt="Iced Apple Pie Latte" width="640" height="960" loading="lazy"></a>
-        <a href="../#tiramisu"><img id="pairB" src="../img/tiramisu/klasyczne-640.webp" alt="Tiramisu klasyczne" width="640" height="960" loading="lazy"></a>
+        <a href="../#jesien" data-ev="pair_drink"><img id="pairA" src="../img/jesien/iced-apple-pie-latte-640.webp" alt="Iced Apple Pie Latte" width="640" height="960" loading="lazy"></a>
+        <a href="../#tiramisu" data-ev="pair_tiramisu"><img id="pairB" src="../img/tiramisu/klasyczne-640.webp" alt="tiramisu klasyczne" width="640" height="960" loading="lazy"></a>
       </div>
       <p class="pair-name" id="pairName">Iced Apple Pie Latte <span>+</span> tiramisu klasyczne</p>
       <p class="pair-line" id="pairLine">Jesienna szarlotka w kubku i klasyk, od którego zaczęła się COPPA.</p>
-      <p class="pair-tag" id="pairTag"></p>
+      <p class="pair-tag" id="pairTag" hidden></p>
       <div class="pair-cta">
-        <a class="btn btn-fill" id="pairGoA" href="../#jesien">Napój w menu</a>
-        <a class="btn btn-ghost" href="../#tiramisu">Tiramisu</a>
+        <a class="btn btn-fill" href="../#jesien" data-ev="pair_drink">Napój w menu</a>
+        <a class="btn btn-ghost" href="../#tiramisu" data-ev="pair_tiramisu">Tiramisu</a>
       </div>
     </div>
   </section>
@@ -120,23 +185,23 @@
   <section class="qr-block">
     <h2>Co jeszcze dziś zamówisz</h2>
     <div class="qr-links">
-      <a class="qr-link" href="../#jesien">
+      <a class="qr-link autumn" href="../#jesien" data-ev="menu_jesien"><span class="leaves" aria-hidden="true"><i class="lf0" style="--x:6%;--d:8.5s;--dl:-1.0s;--s:0.9"></i><i class="lf1" style="--x:22%;--d:10s;--dl:-6.0s;--s:0.7"></i><i class="lf2" style="--x:40%;--d:7.5s;--dl:-3.5s;--s:1.0"></i><i class="lf3" style="--x:58%;--d:9.5s;--dl:-8.0s;--s:0.8"></i><i class="lf0" style="--x:74%;--d:8s;--dl:-2.0s;--s:0.75"></i><i class="lf1" style="--x:88%;--d:11s;--dl:-5.0s;--s:0.95"></i></span>
         <img src="../img/jesien/iced-banana-bread-640.webp" alt="" width="640" height="960" loading="lazy">
         <div><b>Jesienne menu</b><span>Iced banana bread, pumpkin spice, hojicha</span></div>
         <span class="go" aria-hidden="true">›</span>
       </a>
-      <a class="qr-link" href="../#tiramisu">
+      <a class="qr-link" href="../#tiramisu" data-ev="menu_tiramisu">
         <img src="../img/tiramisu/pistacjowe-640.webp" alt="" width="640" height="960" loading="lazy">
         <div><b>Tiramisu</b><span>Klasyczne, pistacjowe i smaki sezonu</span></div>
         <span class="go" aria-hidden="true">›</span>
       </a>
-      <a class="qr-link" href="../#kanapki">
-        <img src="../img/kanapki/wege-640.webp" alt="" width="640" height="800" loading="lazy">
+      <a class="qr-link" href="../#kanapki" data-ev="menu_kanapki">
+        <img src="../img/kanapki/wege-640.webp" alt="" width="640" height="960" loading="lazy">
         <div><b>Kanapki</b><span>Na ciabatcie: salami, wege, mortadela</span></div>
         <span class="go" aria-hidden="true">›</span>
       </a>
-      <a class="qr-link" href="../#karta">
-        <span class="qr-ico" aria-hidden="true">KAWA</span>
+      <a class="qr-link" href="../#karta" data-ev="menu_karta">
+        <img src="../img/jesien/dark-chocolate-mocha-640.webp" alt="" width="640" height="960" loading="lazy">
         <div><b>Stała karta</b><span>Espresso, flat white, cold brew i reszta</span></div>
         <span class="go" aria-hidden="true">›</span>
       </a>
@@ -146,10 +211,9 @@
   <section class="qr-block">
     <h2>Było dobrze? Powiedz o tym innym.</h2>
     <div class="qr-reviews">
-      <a class="btn btn-fill" href="https://search.google.com/local/writereview?placeid=ChIJLUlZCjJbFkcR6R2e2h3mClY" rel="noopener">Opinia w Google</a>
-      <!-- TRIPADVISOR: wpisz adres profilu w data-href; bez adresu przycisk jest ukryty -->
-      <a class="btn btn-ghost" id="taLink" data-href="" href="#" rel="noopener" hidden>Opinia na Tripadvisor</a>
-      <a class="btn btn-ghost" href="https://maps.apple.com/?q=COPPA%20Specialty%20Coffee%20%26%20Tiramisu&amp;ll=50.0755,19.9236" rel="noopener">Ocena w Apple Maps</a>
+      <a class="btn btn-fill" href="https://search.google.com/local/writereview?placeid=ChIJLUlZCjJbFkcR6R2e2h3mClY" rel="noopener" data-ev="review_google">Opinia w Google</a>
+      <a class="btn btn-ghost" id="taLink" data-href="" href="#" rel="noopener" data-ev="review_ta" hidden>Opinia na Tripadvisor</a>
+      <a class="btn btn-ghost" href="https://maps.apple.com/?q=COPPA%20Specialty%20Coffee%20%26%20Tiramisu&amp;ll=50.0755,19.9236" rel="noopener" data-ev="review_apple">Ocena w Apple Maps</a>
     </div>
     <p class="qr-note">Każda opinia pomaga nam bardziej niż reklama. Dziękujemy, Kasia i Tomek.</p>
   </section>
@@ -172,18 +236,14 @@
 
 <script>
 (function () {
-  /* Tripadvisor: przycisk pokazuje się dopiero, gdy jest adres profilu */
+  var ab = document.documentElement.getAttribute('data-ab') || 'b', pre = 'qr-' + ab + '-';
+  /* nazwy zdarzeń z wariantem: toodip stats czyta data-toodip w chwili kliknięcia */
+  document.querySelectorAll('[data-ev]').forEach(function (el) { el.setAttribute('data-toodip', pre + el.getAttribute('data-ev')); });
   var ta = document.getElementById('taLink'); if (ta && ta.dataset.href) { ta.href = ta.dataset.href; ta.hidden = false; }
-
-  /* Para na dziś: losowa z czterech, bez powtórki poprzednio pokazanej */
-  var P = [
-    { a: 'jesien/iced-apple-pie-latte', an: 'Iced Apple Pie Latte', b: 'tiramisu/klasyczne', bn: 'tiramisu klasyczne', line: 'Jesienna szarlotka w kubku i klasyk, od którego zaczęła się COPPA.', tag: '' },
-    { a: 'jesien/oat-cinnamon-hojicha', an: 'Oat Cinnamon Hojicha', b: 'tiramisu/pistacjowe', bn: 'tiramisu pistacjowe', line: 'Rozgrzewająca hojicha z cynamonem i pistacja od pierwszej do ostatniej łyżeczki.', tag: '' },
-    { a: 'jesien/pumpkin-spice', an: 'Pumpkin Spice', b: 'tiramisu/sliwka-kruszonka', bn: 'śliwka z kruszonką', line: 'Pieczona dynia, przyprawy korzenne i śliwki z kruszonką. Cała jesień na jednym stoliku.', tag: '' },
-    { a: 'jesien/white-vanilla-matcha', an: 'White Vanilla Matcha', b: 'tiramisu/matcha-malina', bn: 'tiramisu matcha i malina', line: 'Dla tych, którzy wolą zieleń od espresso. Wanilia, matcha i malina.', tag: 'zestaw bez kawy' }
-  ];
+  /* para na dziś: losowa, bez powtórki poprzednio pokazanej */
+  var P = [{"a": "jesien/iced-apple-pie-latte", "an": "Iced Apple Pie Latte", "b": "tiramisu/klasyczne", "bn": "tiramisu klasyczne", "line": "Jesienna szarlotka w kubku i klasyk, od którego zaczęła się COPPA.", "tag": ""}, {"a": "jesien/oat-cinnamon-hojicha", "an": "Oat Cinnamon Hojicha", "b": "tiramisu/pistacjowe", "bn": "tiramisu pistacjowe", "line": "Rozgrzewająca hojicha z cynamonem i pistacja od pierwszej do ostatniej łyżeczki.", "tag": ""}, {"a": "jesien/pumpkin-spice", "an": "Pumpkin Spice", "b": "tiramisu/sliwka-kruszonka", "bn": "śliwka z kruszonką", "line": "Pieczona dynia, przyprawy korzenne i śliwki z kruszonką. Cała jesień na jednym stoliku.", "tag": ""}, {"a": "jesien/white-vanilla-matcha", "an": "White Vanilla Matcha", "b": "tiramisu/matcha-malina", "bn": "tiramisu matcha i malina", "line": "Dla tych, którzy wolą zieleń od espresso. Wanilia, matcha i malina.", "tag": "zestaw bez kawy"}];
   var last = null; try { last = localStorage.getItem('coppaPair'); } catch (e) {}
-  var pool = P.filter(function (p) { return p.a !== last; }); if (!pool.length) pool = P;
+  var pool = P.filter(function (x) { return x.a !== last; }); if (!pool.length) pool = P;
   var p = pool[Math.floor(Math.random() * pool.length)];
   try { localStorage.setItem('coppaPair', p.a); } catch (e) {}
   var A = document.getElementById('pairA'), B = document.getElementById('pairB');
@@ -192,8 +252,12 @@
   document.getElementById('pairName').innerHTML = p.an + ' <span>+</span> ' + p.bn;
   document.getElementById('pairLine').textContent = p.line;
   var tag = document.getElementById('pairTag'); tag.textContent = p.tag; tag.hidden = !p.tag;
+  /* WiFi to przycisk, nie link, więc zdarzenie wysyłamy ręcznie; widok wariantu po załadowaniu */
+  var w = document.getElementById('wifiCopy'); if (w) w.addEventListener('click', function () { window.toodip && window.toodip(pre + 'wifi'); });
+  addEventListener('load', function () { window.toodip && window.toodip(pre + 'view'); });
 })();
 </script>
 <script src="../app.js" defer></script>
+<script defer src="https://stats.toodip.com/s.js" data-id="22ae417e-a9ca-4837-a406-ca667fc24079"></script>
 </body>
 </html>
