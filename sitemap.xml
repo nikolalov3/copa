@@ -17,6 +17,14 @@
     <image:image><image:loc>https://www.coppaspecialty.cafe/img/tiramisu/pralina-1080.webp</image:loc><image:title>Tiramisu pralina z orzecha laskowego, COPPA Kraków</image:title></image:image>
     <image:image><image:loc>https://www.coppaspecialty.cafe/img/tiramisu/matcha-malina-1080.webp</image:loc><image:title>Tiramisu matcha i malina, COPPA Kraków</image:title></image:image>
     <image:image><image:loc>https://www.coppaspecialty.cafe/img/tiramisu/sliwka-kruszonka-1080.webp</image:loc><image:title>Tiramisu śliwka z kruszonką, COPPA Kraków</image:title></image:image>
+    <image:image><image:loc>https://www.coppaspecialty.cafe/img/menu/iced-banana-bread.webp</image:loc><image:title>Iced Banana Bread, COPPA Kraków</image:title></image:image>
+    <image:image><image:loc>https://www.coppaspecialty.cafe/img/menu/iced-apple-pie-latte.webp</image:loc><image:title>Iced Apple Pie Latte, COPPA Kraków</image:title></image:image>
+    <image:image><image:loc>https://www.coppaspecialty.cafe/img/menu/pumpkin-spice.webp</image:loc><image:title>Pumpkin Spice, COPPA Kraków</image:title></image:image>
+    <image:image><image:loc>https://www.coppaspecialty.cafe/img/menu/banana-bread-latte.webp</image:loc><image:title>Banana Bread Latte, COPPA Kraków</image:title></image:image>
+    <image:image><image:loc>https://www.coppaspecialty.cafe/img/menu/white-vanilla-matcha.webp</image:loc><image:title>White Vanilla Matcha, COPPA Kraków</image:title></image:image>
+    <image:image><image:loc>https://www.coppaspecialty.cafe/img/menu/berry-cocoa.webp</image:loc><image:title>Berry Cocoa, COPPA Kraków</image:title></image:image>
+    <image:image><image:loc>https://www.coppaspecialty.cafe/img/menu/dark-chocolate-mocha.webp</image:loc><image:title>Dark Chocolate Mocha, COPPA Kraków</image:title></image:image>
+    <image:image><image:loc>https://www.coppaspecialty.cafe/img/menu/oat-cinnamon-hojicha.webp</image:loc><image:title>Oat Cinnamon Hojicha, COPPA Kraków</image:title></image:image>
   </url>
   <url>
     <loc>https://www.coppaspecialty.cafe/en/</loc>
@@ -35,5 +43,13 @@
     <image:image><image:loc>https://www.coppaspecialty.cafe/img/tiramisu/pralina-1080.webp</image:loc><image:title>Tiramisu pralina z orzecha laskowego, COPPA Kraków</image:title></image:image>
     <image:image><image:loc>https://www.coppaspecialty.cafe/img/tiramisu/matcha-malina-1080.webp</image:loc><image:title>Tiramisu matcha i malina, COPPA Kraków</image:title></image:image>
     <image:image><image:loc>https://www.coppaspecialty.cafe/img/tiramisu/sliwka-kruszonka-1080.webp</image:loc><image:title>Tiramisu śliwka z kruszonką, COPPA Kraków</image:title></image:image>
+    <image:image><image:loc>https://www.coppaspecialty.cafe/img/menu/iced-banana-bread.webp</image:loc><image:title>Iced Banana Bread, COPPA Kraków</image:title></image:image>
+    <image:image><image:loc>https://www.coppaspecialty.cafe/img/menu/iced-apple-pie-latte.webp</image:loc><image:title>Iced Apple Pie Latte, COPPA Kraków</image:title></image:image>
+    <image:image><image:loc>https://www.coppaspecialty.cafe/img/menu/pumpkin-spice.webp</image:loc><image:title>Pumpkin Spice, COPPA Kraków</image:title></image:image>
+    <image:image><image:loc>https://www.coppaspecialty.cafe/img/menu/banana-bread-latte.webp</image:loc><image:title>Banana Bread Latte, COPPA Kraków</image:title></image:image>
+    <image:image><image:loc>https://www.coppaspecialty.cafe/img/menu/white-vanilla-matcha.webp</image:loc><image:title>White Vanilla Matcha, COPPA Kraków</image:title></image:image>
+    <image:image><image:loc>https://www.coppaspecialty.cafe/img/menu/berry-cocoa.webp</image:loc><image:title>Berry Cocoa, COPPA Kraków</image:title></image:image>
+    <image:image><image:loc>https://www.coppaspecialty.cafe/img/menu/dark-chocolate-mocha.webp</image:loc><image:title>Dark Chocolate Mocha, COPPA Kraków</image:title></image:image>
+    <image:image><image:loc>https://www.coppaspecialty.cafe/img/menu/oat-cinnamon-hojicha.webp</image:loc><image:title>Oat Cinnamon Hojicha, COPPA Kraków</image:title></image:image>
   </url>
 </urlset>

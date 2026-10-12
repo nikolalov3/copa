@@ -37,7 +37,7 @@
 <link rel="manifest" href="site.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800&family=Manrope:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="img/tiramisu/klasyczne-1080.webp" type="image/webp">
 <link rel="stylesheet" href="style.css">
 
@@ -92,6 +92,9 @@
         { "@type": "MenuItem", "name": "Tiramisu matcha i malina", "description": "Matcha daje zielone nuty i umami, malina wnosi owocowy charakter. Bez kawy, bez alkoholu." },
         { "@type": "MenuItem", "name": "Tiramisu śliwka z kruszonką", "description": "Dojrzałe śliwki i chrupiąca kruszonka na aksamitnym kremie. Smak jesieni." }
       ]},
+      {"@type": "MenuSection", "name": "Stała karta", "hasMenuItem": [{"@type": "MenuItem", "name": "Cortado"}, {"@type": "MenuItem", "name": "Cappuccino"}, {"@type": "MenuItem", "name": "Flat white"}, {"@type": "MenuItem", "name": "Latte"}, {"@type": "MenuItem", "name": "Iced latte"}, {"@type": "MenuItem", "name": "Matcha"}, {"@type": "MenuItem", "name": "Kakao"}, {"@type": "MenuItem", "name": "Espresso"}, {"@type": "MenuItem", "name": "Batch brew"}, {"@type": "MenuItem", "name": "Refill"}, {"@type": "MenuItem", "name": "Hand brew"}, {"@type": "MenuItem", "name": "Cold brew"}, {"@type": "MenuItem", "name": "Orange espresso"}, {"@type": "MenuItem", "name": "Espresso tonic"}, {"@type": "MenuItem", "name": "Orange juice"}, {"@type": "MenuItem", "name": "Lemonade"}]},
+      {"@type": "MenuSection", "name": "Kawy sezonowe (jesień)", "hasMenuItem": [{"@type": "MenuItem", "name": "Iced Banana Bread", "description": "Chlebek bananowy w kawowej odsłonie na zimno. Słodycz dojrzałych bananów, aromat cynamonu, mleko i espresso. Delikatna, słodka, idealna na ciepły jesienny dzień."}, {"@type": "MenuItem", "name": "Iced Apple Pie Latte", "description": "Smak przypieczonego jesiennego jabłka połączony z naszym espresso. Kremowe, przyjemnie słodkie i otulające, zupełnie jak domowa szarlotka u babci."}, {"@type": "MenuItem", "name": "Pumpkin Spice", "description": "Nasz domowy syrop z pieczonej dyni i przypraw korzennych z nutą pomarańczy. Kremowy, głęboki w smaku i przyjemnie wyważony w słodyczy. Nie mogło go zabraknąć w jesiennej karcie."}, {"@type": "MenuItem", "name": "Banana Bread Latte", "description": "Każdy kocha chlebek bananowy, a dzięki recepturze naszej baristki Karoli zamieniliśmy go w kremową kawę na chłodne jesienne wieczory."}]},
+      {"@type": "MenuSection", "name": "Napoje sezonowe (jesień)", "hasMenuItem": [{"@type": "MenuItem", "name": "White Vanilla Matcha", "description": "Matcha od Oromatcha z naszym syropem waniliowym, wzbogaconym tonką i białą czekoladą. Łagodna, kremowa, z deserową nutą. Faworytka naszej head baristki."}, {"@type": "MenuItem", "name": "Berry Cocoa", "description": "Nasze kakao z domowym purée malinowym. Słodycz mlecznej czekolady przełamana lekką kwasowością malin. Delikatne, owocowe i przyjemnie czekoladowe."}, {"@type": "MenuItem", "name": "Dark Chocolate Mocha", "description": "Podwójne espresso z deserowym kakao i mlekiem. Intensywnie czekoladowe, z delikatną słodyczą i głębokim, bogatym smakiem."}, {"@type": "MenuItem", "name": "Oat Cinnamon Hojicha", "description": "Prażona japońska herbata z mlekiem owsianym i nutą korzennych przypraw. Lekko słodka, z orzechowym posmakiem i rozgrzewającym charakterem."}]},
       { "@type": "MenuSection", "name": "Kawa", "description": "Bazowe espresso z palarni Roastains. Drugi młynek z rotującymi ziarnami o owocowym profilu (funky flat white). Kawy z innych palarni specialty, m.in. Gringo Nordic Coffee Roasters. Mleko klasyczne, bez laktozy, owsiane i grochowe bez dopłaty." }
     ]
   }
@@ -106,8 +109,9 @@
     { "@type": "Question", "name": "Jakie smaki tiramisu ma COPPA?", "acceptedAnswer": { "@type": "Answer", "text": "Stałe: klasyczne i pistacjowe. Sezonowe teraz: Earl Grey, hojicha, limoncello, białe brzoskwinie z tymiankiem cytrynowym, pralina z orzecha laskowego, matcha z maliną, śliwka z kruszonką. Smaki sezonowe rotują, aktualna gablota jest na stronie i na Instagramie @coppaspecialty." } },
     { "@type": "Question", "name": "Czy w COPPIE jest tiramisu bez kawy albo bez alkoholu?", "acceptedAnswer": { "@type": "Answer", "text": "Bez alkoholu są: klasyczne, pistacjowe, Earl Grey, hojicha, limoncello oraz matcha z maliną. Bez kawy: Earl Grey, hojicha, limoncello oraz matcha z maliną. O pozostałe smaki zapytaj przy kasie." } },
     { "@type": "Question", "name": "Czy tiramisu w COPPIE jest na wynos?", "acceptedAnswer": { "@type": "Answer", "text": "Tak. Na wynos mamy zwykle 3 do 4 smaków dziennie, nie każdy smak jest dostępny. Które są dziś, zapytaj przy kasie." } },
-    { "@type": "Question", "name": "Jaką kawę podaje COPPA?", "acceptedAnswer": { "@type": "Answer", "text": "Pracujemy wyłącznie na kawach specialty. Bazowe espresso pochodzi z palarni Roastains. Na drugim młynku regularnie zmieniamy ziarna o bardziej owocowym profilu, na przykład Etiopia albo Kostaryka, stąd nasz funky flat white. Często pracujemy też ze szwedzką palarnią Gringo Nordic Coffee Roasters." } },
+    { "@type": "Question", "name": "Jaką kawę podaje COPPA?", "acceptedAnswer": { "@type": "Answer", "text": "Pracujemy wyłącznie na kawach specialty. Bazowe espresso pochodzi z palarni Roastains. Na drugim młynku regularnie zmieniamy ziarna o bardziej owocowym profilu, na przykład Etiopia albo Kostaryka, stąd nasz funky flat white. Często pracujemy też ze szwedzką palarnią Gringo Nordic Coffee Roasters. W stałej karcie: espresso, cortado, cappuccino, flat white, latte, iced latte, batch brew, hand brew, cold brew, orange espresso i espresso tonic." } },
     { "@type": "Question", "name": "Czy COPPA ma mleko roślinne?", "acceptedAnswer": { "@type": "Answer", "text": "Tak. Do kaw mlecznych można wybrać mleko klasyczne, bez laktozy, owsiane albo grochowe. Każde bez dopłaty." } },
+    { "@type": "Question", "name": "Czy w COPPIE jest pumpkin spice latte?", "acceptedAnswer": { "@type": "Answer", "text": "Tak. Jesienią w karcie jest Pumpkin Spice na naszym domowym syropie z pieczonej dyni i przypraw korzennych z nutą pomarańczy. Do tego Iced Banana Bread, Iced Apple Pie Latte, Banana Bread Latte, White Vanilla Matcha, Berry Cocoa, Dark Chocolate Mocha i Oat Cinnamon Hojicha na mleku owsianym." } },
     { "@type": "Question", "name": "Czy w COPPIE jest WiFi?", "acceptedAnswer": { "@type": "Answer", "text": "Tak, sieć COPPA GUEST. Hasło jest na stronie w sekcji Na miejscu i przy kasie." } },
     { "@type": "Question", "name": "Gdzie jest COPPA i jak dojechać?", "acceptedAnswer": { "@type": "Answer", "text": "COPPA jest na Krowodrzy, przy ulicy Mazowieckiej 60, 30-019 Kraków: 8 minut spacerem od Placu Inwalidów, 10 minut od Parku Krakowskiego i Nowego Kleparza, 25 minut od Rynku Głównego. Trasę otworzysz w Google Maps lub Apple Maps z naszej strony." } },
     { "@type": "Question", "name": "W jakich godzinach jest otwarta COPPA?", "acceptedAnswer": { "@type": "Answer", "text": "Od poniedziałku do piątku 8:00-19:00, w sobotę i niedzielę 9:30-18:00." } },
@@ -129,6 +133,7 @@
     <a href="#tiramisu">Tiramisu</a>
     <a href="#miejsce">Miejsce</a>
     <a href="#kawa">Kawa</a>
+    <a href="#menu">Menu</a>
     <a href="#na-miejscu">Na miejscu</a>
     <a href="#kontakt">Kontakt</a>
   </nav>
@@ -312,7 +317,124 @@
     <div><dt>Palarnie</dt><dd>Pracujemy wyłącznie na kawach specialty. Poza stałym espresso rotujemy kawy z różnych palarni, bardzo często ze szwedzkiej Gringo Nordic Coffee Roasters.</dd></div>
     <div><dt>Mleko</dt><dd>Klasyczne, bez laktozy, owsiane albo grochowe. Każdy wariant bez dopłaty.</dd></div>
   </dl>
-  <p class="note rv">Pełna karta sezonowa z cenami pojawi się tu wkrótce.</p>
+</section>
+
+<!-- MENU -->
+<section class="menu wrap" id="menu">
+  <div class="sec-head rv">
+    <h2>Menu: kawa specialty, matcha i jesienne napoje w Krakowie.</h2>
+    <p class="sec-lead">Stała karta jest taka sama jak na ścianie przy barze. Obok niej napoje sezonowe, które zmieniają się kilka razy w roku. Tiramisu znajdziesz wyżej, w galerii.</p>
+  </div>
+  <div class="board rv">
+    <h3 class="menu-h3">Stała karta</h3>
+    <div class="board-cols">
+      <div>
+        <p class="board-sub">Na mleku</p>
+        <ul class="board-list">
+          <li>Cortado</li>
+          <li>Cappuccino</li>
+          <li>Flat white</li>
+          <li>Latte</li>
+          <li>Iced latte</li>
+          <li>Matcha</li>
+          <li>Kakao</li>
+        </ul>
+      </div>
+      <div>
+        <p class="board-sub">Bez mleka</p>
+        <ul class="board-list">
+          <li>Espresso</li>
+          <li>Batch brew</li>
+          <li>Refill</li>
+          <li>Hand brew</li>
+          <li>Cold brew</li>
+          <li>Orange espresso</li>
+          <li>Espresso tonic</li>
+          <li>Orange juice</li>
+          <li>Lemonade</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="season">
+    <h3 class="menu-h3 rv">Jesień w karcie</h3>
+    <div class="menu-grid">
+      <div class="menu-col">
+        <p class="board-sub">Kawy sezonowe</p>
+        <ul class="menu-list">
+        <li class="menu-item rv">
+          <img src="img/menu/iced-banana-bread.webp" alt="Iced Banana Bread w COPPIE" width="240" height="240" loading="lazy">
+          <div>
+            <h4>Iced Banana Bread</h4>
+            <p>Chlebek bananowy w kawowej odsłonie na zimno. Słodycz dojrzałych bananów, aromat cynamonu, mleko i espresso. Delikatna, słodka, idealna na ciepły jesienny dzień.</p>
+            <p class="tags">na zimno, z espresso</p>
+          </div>
+        </li>
+        <li class="menu-item rv">
+          <img src="img/menu/iced-apple-pie-latte.webp" alt="Iced Apple Pie Latte w COPPIE" width="240" height="240" loading="lazy">
+          <div>
+            <h4>Iced Apple Pie Latte</h4>
+            <p>Smak przypieczonego jesiennego jabłka połączony z naszym espresso. Kremowe, przyjemnie słodkie i otulające, zupełnie jak domowa szarlotka u babci.</p>
+            <p class="tags">na zimno, z espresso</p>
+          </div>
+        </li>
+        <li class="menu-item rv">
+          <img src="img/menu/pumpkin-spice.webp" alt="Pumpkin Spice w COPPIE" width="240" height="240" loading="lazy">
+          <div>
+            <h4>Pumpkin Spice</h4>
+            <p>Nasz domowy syrop z pieczonej dyni i przypraw korzennych z nutą pomarańczy. Kremowy, głęboki w smaku i przyjemnie wyważony w słodyczy. Nie mogło go zabraknąć w jesiennej karcie.</p>
+            <p class="tags">domowy syrop</p>
+          </div>
+        </li>
+        <li class="menu-item rv">
+          <img src="img/menu/banana-bread-latte.webp" alt="Banana Bread Latte w COPPIE" width="240" height="240" loading="lazy">
+          <div>
+            <h4>Banana Bread Latte</h4>
+            <p>Każdy kocha chlebek bananowy, a dzięki recepturze naszej baristki Karoli zamieniliśmy go w kremową kawę na chłodne jesienne wieczory.</p>
+          </div>
+        </li>
+        </ul>
+      </div>
+      <div class="menu-col">
+        <p class="board-sub">Napoje sezonowe</p>
+        <ul class="menu-list">
+        <li class="menu-item rv">
+          <img src="img/menu/white-vanilla-matcha.webp" alt="White Vanilla Matcha w COPPIE" width="240" height="240" loading="lazy">
+          <div>
+            <h4>White Vanilla Matcha</h4>
+            <p>Matcha od Oromatcha z naszym syropem waniliowym, wzbogaconym tonką i białą czekoladą. Łagodna, kremowa, z deserową nutą. Faworytka naszej head baristki.</p>
+            <p class="tags">bez kawy</p>
+          </div>
+        </li>
+        <li class="menu-item rv">
+          <img src="img/menu/berry-cocoa.webp" alt="Berry Cocoa w COPPIE" width="240" height="240" loading="lazy">
+          <div>
+            <h4>Berry Cocoa</h4>
+            <p>Nasze kakao z domowym purée malinowym. Słodycz mlecznej czekolady przełamana lekką kwasowością malin. Delikatne, owocowe i przyjemnie czekoladowe.</p>
+            <p class="tags">bez kawy</p>
+          </div>
+        </li>
+        <li class="menu-item rv">
+          <img src="img/menu/dark-chocolate-mocha.webp" alt="Dark Chocolate Mocha w COPPIE" width="240" height="240" loading="lazy">
+          <div>
+            <h4>Dark Chocolate Mocha</h4>
+            <p>Podwójne espresso z deserowym kakao i mlekiem. Intensywnie czekoladowe, z delikatną słodyczą i głębokim, bogatym smakiem.</p>
+            <p class="tags">z espresso</p>
+          </div>
+        </li>
+        <li class="menu-item rv">
+          <img src="img/menu/oat-cinnamon-hojicha.webp" alt="Oat Cinnamon Hojicha w COPPIE" width="240" height="240" loading="lazy">
+          <div>
+            <h4>Oat Cinnamon Hojicha</h4>
+            <p>Prażona japońska herbata z mlekiem owsianym i nutą korzennych przypraw. Lekko słodka, z orzechowym posmakiem i rozgrzewającym charakterem.</p>
+            <p class="tags">bez kawy, mleko owsiane</p>
+          </div>
+        </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <p class="note rv">Do kaw mlecznych mleko klasyczne, bez laktozy, owsiane albo grochowe, każde bez dopłaty.</p>
 </section>
 
 <!-- 04 NA MIEJSCU -->
@@ -367,11 +489,15 @@
     </details>
     <details name="faq">
       <summary>Jaką kawę podajecie?</summary>
-      <p>Wyłącznie specialty. Bazowe espresso z palarni Roastains, na drugim młynku rotujące ziarna o owocowym profilu, na przykład Etiopia albo Kostaryka. Często pracujemy też ze szwedzką Gringo Nordic Coffee Roasters.</p>
+      <p>Wyłącznie specialty. Bazowe espresso z palarni Roastains, na drugim młynku rotujące ziarna o owocowym profilu, na przykład Etiopia albo Kostaryka. Często pracujemy też ze szwedzką Gringo Nordic Coffee Roasters. W stałej karcie: espresso, cortado, cappuccino, flat white, latte, iced latte, batch brew, hand brew, cold brew, orange espresso i espresso tonic.</p>
     </details>
     <details name="faq">
       <summary>Czy jest mleko roślinne?</summary>
       <p>Tak. Klasyczne, bez laktozy, owsiane albo grochowe, każde bez dopłaty.</p>
+    </details>
+    <details name="faq">
+      <summary>Czy w COPPIE jest pumpkin spice latte?</summary>
+      <p>Tak. Jesienią w karcie jest Pumpkin Spice na naszym domowym syropie z pieczonej dyni i przypraw korzennych z nutą pomarańczy. Do tego Iced Banana Bread, Iced Apple Pie Latte, Banana Bread Latte, White Vanilla Matcha, Berry Cocoa, Dark Chocolate Mocha i Oat Cinnamon Hojicha na mleku owsianym.</p>
     </details>
     <details name="faq">
       <summary>Czy jest WiFi?</summary>
@@ -439,6 +565,7 @@
       <li><a href="#tiramisu">Tiramisu</a></li>
       <li><a href="#miejsce">Miejsce</a></li>
       <li><a href="#kawa">Kawa</a></li>
+      <li><a href="#menu">Menu</a></li>
       <li><a href="#faq">Pytania</a></li>
       <li><a href="https://www.instagram.com/coppaspecialty/" rel="noopener">Instagram</a></li>
     </ul>
@@ -448,7 +575,7 @@
 
 <nav class="dock" id="dock" aria-label="Szybka nawigacja">
   <a href="#tiramisu" data-sec="tiramisu">Tiramisu</a>
-  <a href="#kawa" data-sec="kawa">Kawa</a>
+  <a href="#menu" data-sec="menu">Menu</a>
   <a href="#na-miejscu" data-sec="na-miejscu">WiFi</a>
   <a href="#kontakt" data-sec="kontakt">Dojazd</a>
 </nav>

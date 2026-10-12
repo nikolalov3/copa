@@ -4,6 +4,7 @@
   --paper:#F6F2EB; --paper-2:#EFE9DF; --ink:#1F1A18; --ink-2:#4E4744; --mist:#8B847D;
   --line:rgba(31,26,24,.14); --line-strong:rgba(31,26,24,.5);
   --sage:#7F8C80; --sage-soft:#E2E5DE; --rose:#9B6A6C; --rose-soft:#EEE2E1; --plum:#3A2325;
+  --board:"Big Shoulders Display","Bebas Neue",Impact,"Arial Narrow",sans-serif;
   --sans:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;
   --mono:"DM Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
   --gutter:22px; --maxw:1280px; --ease:cubic-bezier(.2,.7,.2,1);
@@ -116,6 +117,22 @@ h3{font-size:1.15rem;font-weight:500;letter-spacing:-.01em}
 .rows dt{font-size:1rem;font-weight:500;color:var(--ink)}
 .rows dd{color:var(--ink-2);line-height:1.65;max-width:60ch}
 
+/* menu */
+.menu{padding:96px 0 40px}
+.menu-h3{font-size:1.45rem;font-weight:300;letter-spacing:-.02em;margin-bottom:20px}
+.board-sub{font-size:.82rem;color:var(--mist);margin-bottom:10px}
+.board{padding-top:8px}
+.board-cols{display:grid;grid-template-columns:1fr 1fr;gap:24px 24px}
+.board-list li{font-family:var(--board);font-weight:800;text-transform:uppercase;font-size:clamp(1.35rem,5.6vw,2rem);line-height:1.12;letter-spacing:.015em;color:var(--ink);padding:2px 0}
+.season{margin-top:64px}
+.menu-grid{display:grid;gap:20px}
+.menu-list{display:grid}
+.menu-item{display:grid;grid-template-columns:76px 1fr;gap:16px;padding:18px 0;border-bottom:1px solid var(--line);align-items:start}
+.menu-item:last-child{border-bottom:0}
+.menu-item img{width:76px;height:76px;border-radius:16px;background:#F3EEE4;object-fit:cover}
+.menu-item h4{margin:2px 0 6px;font-family:var(--board);font-weight:800;text-transform:uppercase;font-size:1.3rem;line-height:1.1;letter-spacing:.015em}
+.menu-item p{color:var(--ink-2);line-height:1.6;font-size:.95rem;max-width:48ch}
+
 /* na miejscu */
 .place{padding:96px 0 40px}
 .place-grid{display:grid;gap:12px}
@@ -198,6 +215,10 @@ img[data-fade].ld{opacity:1}
   .story-fig{margin-inline:0}
   .strip{gap:24px;grid-template-columns:1fr 1fr;width:min(100% - var(--gutter)*2,900px)}
   .rows > div{grid-template-columns:180px 1fr;gap:24px;padding:24px 0}
+  .board-cols{gap:24px 56px;max-width:900px}
+  .menu-grid{grid-template-columns:1fr 1fr;column-gap:56px}
+  .menu-item{grid-template-columns:88px 1fr;gap:20px}
+  .menu-item img{width:88px;height:88px}
   .place-grid{grid-template-columns:1.3fr 1fr 1fr 1fr}
   .visit-grid{grid-template-columns:1.2fr .8fr;align-items:start}
   .footer{padding-bottom:56px}
