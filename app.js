@@ -83,6 +83,49 @@
   };
   $$('[data-gallery]').forEach(initGallery);
 
+  /* 1b. Nagłówek: główne zdjęcie + jedno losowe z alt2-alt5, zmiana co 5 s.
+     Ostatnio pokazane alternatywne jest pamiętane w przeglądarce i pomijane w losowaniu,
+     więc przy kolejnej wizycie prawie zawsze pojawia się inne. */
+  const heroFig = $('.hero-fig[data-alts]');
+  if (heroFig) {
+    let alts = [];
+    try { alts = JSON.parse(heroFig.dataset.alts); } catch (_) {}
+    if (alts.length) {
+      let last = null;
+      try { last = localStorage.getItem('coppaHeroAlt'); } catch (_) {}
+      const pool = alts.filter(a => a.src !== last);
+      const from = pool.length ? pool : alts;
+      const pick = from[Math.floor(Math.random() * from.length)];
+      try { localStorage.setItem('coppaHeroAlt', pick.src); } catch (_) {}
+      const main = heroFig.querySelector('img');
+      let alt = null, ready = null, on = false, timer = 0;
+      const build = () => {
+        alt = new Image();
+        alt.className = 'hero-alt'; alt.alt = pick.alt; alt.decoding = 'async';
+        if ('fetchPriority' in alt) alt.fetchPriority = 'low';
+        alt.sizes = main?.getAttribute('sizes') || '100vw';
+        alt.srcset = `${pick.src}-640.webp 640w, ${pick.src}-1080.webp 1080w`;
+        alt.src = `${pick.src}-640.webp`;
+        heroFig.appendChild(alt);
+        ready = (alt.decode ? alt.decode() : Promise.resolve()).catch(() => {});
+      };
+      const tick = () => {
+        clearTimeout(timer);
+        timer = setTimeout(async () => {
+          await ready;
+          if (!document.hidden) { on = !on; alt.classList.toggle('on', on); }
+          tick();
+        }, 5000);
+      };
+      /* drugie zdjęcie pobiera się dopiero po załadowaniu strony, żeby nie spowalniać głównego */
+      const startHero = () => { build(); tick(); };
+      if (document.readyState === 'complete') startHero(); else addEventListener('load', startHero, { once: true });
+      heroFig.addEventListener('mouseenter', () => clearTimeout(timer));
+      heroFig.addEventListener('mouseleave', () => { if (alt) tick(); });
+      document.addEventListener('visibilitychange', () => { if (document.hidden) clearTimeout(timer); else if (alt) tick(); });
+    }
+  }
+
   /* 2. „Otwarte do …” w strefie Europe/Warsaw + dzisiejszy wiersz w tabeli godzin */
   const HOURS = { 0: [9.5, 18], 1: [8, 19], 2: [8, 19], 3: [8, 19], 4: [8, 19], 5: [8, 19], 6: [9.5, 18] };
   const EN = document.documentElement.lang.startsWith('en');
