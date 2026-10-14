@@ -10,6 +10,19 @@
 <meta name="theme-color" content="#F6F2EB">
 <meta name="color-scheme" content="light">
 <script>
+/* język telefonu: polski zostaje tutaj, każdy inny idzie na /en/qr/ (z zachowaniem ?stolik / ?kasa).
+   Ręczny wybór przyciskiem PL/EN jest zapamiętany i ma pierwszeństwo; podgląd bez przekierowania: ?lang=pl */
+(function () {
+  try {
+    var q = new URLSearchParams(location.search), force = q.get('lang'), pref = null;
+    try { pref = localStorage.getItem('coppaLang'); } catch (e) {}
+    var want = force || pref;
+    if (!want) { var l = ((navigator.languages && navigator.languages[0]) || navigator.language || 'pl').toLowerCase(); want = l.indexOf('pl') === 0 ? 'pl' : 'en'; }
+    if (want === 'en') location.replace('/en/qr/' + location.search + location.hash);
+  } catch (e) {}
+})();
+</script>
+<script>
 /* test A/B: losowy wariant na gościa, zapamiętany w przeglądarce; podgląd ?ab=a lub ?ab=b */
 (function () { var v; try { v = localStorage.getItem('coppaAB'); } catch (e) {}
   if (v !== 'a' && v !== 'b') { v = Math.random() < 0.5 ? 'a' : 'b'; try { localStorage.setItem('coppaAB', v); } catch (e) {} }
@@ -237,6 +250,10 @@
 <script>
 (function () {
   var ab = document.documentElement.getAttribute('data-ab') || 'b', pre = 'qr-' + ab + '-';
+  /* ręczny wybór języka: zapamiętany, żeby przekierowanie po języku telefonu go nie nadpisywało */
+  var sw = document.querySelector('a.lang');
+  if (sw) { sw.href = sw.getAttribute('href').split('?')[0] + location.search.replace(/[?&]lang=[^&]*/, '').replace(/^&/, '?');
+    sw.addEventListener('click', function () { try { localStorage.setItem('coppaLang', 'en'); } catch (e) {} }); }
   /* nazwy zdarzeń z wariantem: toodip stats czyta data-toodip w chwili kliknięcia */
   document.querySelectorAll('[data-ev]').forEach(function (el) { el.setAttribute('data-toodip', pre + el.getAttribute('data-ev')); });
   var ta = document.getElementById('taLink'); if (ta && ta.dataset.href) { ta.href = ta.dataset.href; ta.hidden = false; }

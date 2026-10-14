@@ -237,6 +237,10 @@
 <script>
 (function () {
   var ab = document.documentElement.getAttribute('data-ab') || 'b', pre = 'qr-en-' + ab + '-';
+  /* ręczny wybór języka: zapamiętany, żeby przekierowanie po języku telefonu go nie nadpisywało */
+  var sw = document.querySelector('a.lang');
+  if (sw) { sw.href = sw.getAttribute('href').split('?')[0] + location.search.replace(/[?&]lang=[^&]*/, '').replace(/^&/, '?');
+    sw.addEventListener('click', function () { try { localStorage.setItem('coppaLang', 'pl'); } catch (e) {} }); }
   /* nazwy zdarzeń z wariantem: toodip stats czyta data-toodip w chwili kliknięcia */
   document.querySelectorAll('[data-ev]').forEach(function (el) { el.setAttribute('data-toodip', pre + el.getAttribute('data-ev')); });
   var ta = document.getElementById('taLink'); if (ta && ta.dataset.href) { ta.href = ta.dataset.href; ta.hidden = false; }
