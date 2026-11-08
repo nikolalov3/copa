@@ -1,0 +1,4 @@
+Tiramisu, menu listopad 2026 (kolejnosc jak w wiadomosci od Tomka).
+Podmien kazdy plik zdjeciem tego smaku. Najwazniejsze: zostaw poczatek nazwy (np. 01-banoffee).
+Format dowolny (JPG, HEIC, PNG). Jesli nowego zdjecia nie ma, zostaw zaslepke: wtedy zostaje obecne zdjecie ze strony.
+Ten folder nie idzie na serwer (img/_src jest wykluczony z wdrozenia).
