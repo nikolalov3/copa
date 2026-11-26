@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://www.coppaspecialty.cafe/</loc>
-    <lastmod>2026-10-12</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="pl" href="https://www.coppaspecialty.cafe/"/>
@@ -30,7 +30,7 @@
   </url>
   <url>
     <loc>https://www.coppaspecialty.cafe/en/</loc>
-    <lastmod>2026-10-12</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="pl" href="https://www.coppaspecialty.cafe/"/>
@@ -55,5 +55,28 @@
     <image:image><image:loc>https://www.coppaspecialty.cafe/img/kanapki/salami-piccante-1080.webp</image:loc><image:title>Kanapka salami piccante, COPPA Kraków</image:title></image:image>
     <image:image><image:loc>https://www.coppaspecialty.cafe/img/kanapki/wege-1080.webp</image:loc><image:title>Kanapka wege, COPPA Kraków</image:title></image:image>
     <image:image><image:loc>https://www.coppaspecialty.cafe/img/kanapki/mortadela-1080.webp</image:loc><image:title>Kanapka z mortadelą, COPPA Kraków</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://www.coppaspecialty.cafe/kawa-ziarnista/</loc>
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://www.coppaspecialty.cafe/img/kawa-ziarnista/polka-1280.webp</image:loc><image:title>Półka z kawami ziarnistymi specialty w COPPA na Krowodrzy</image:title></image:image>
+    <image:image><image:loc>https://www.coppaspecialty.cafe/img/kawa-ziarnista/barista-1280.webp</image:loc><image:title>Barista COPPY z paczkami kawy ziarnistej</image:title></image:image>
+    <image:image><image:loc>https://www.coppaspecialty.cafe/img/kawa-ziarnista/paczki-1280.webp</image:loc><image:title>Paczki kawy ziarnistej Roastains w COPPA</image:title></image:image>
+    <image:image><image:loc>https://www.coppaspecialty.cafe/img/kawa-ziarnista/regal-1280.webp</image:loc><image:title>Regał z kawą ziarnistą i akcesoriami w COPPA</image:title></image:image>
+    <image:image><image:loc>https://www.coppaspecialty.cafe/img/kawa-ziarnista/brazylia-caramel-kiss-640.webp</image:loc><image:title>Kawa ziarnista Brazylia Caramel Kiss, COPPA Kraków</image:title></image:image>
+    <image:image><image:loc>https://www.coppaspecialty.cafe/img/kawa-ziarnista/brazylia-sweet-espresso-640.webp</image:loc><image:title>Kawa ziarnista Brazylia Sweet Espresso, COPPA Kraków</image:title></image:image>
+    <image:image><image:loc>https://www.coppaspecialty.cafe/img/kawa-ziarnista/etiopia-mind-blower-640.webp</image:loc><image:title>Kawa ziarnista Etiopia Mind-Blower, COPPA Kraków</image:title></image:image>
+    <image:image><image:loc>https://www.coppaspecialty.cafe/img/kawa-ziarnista/meksyk-cherry-brownie-640.webp</image:loc><image:title>Kawa ziarnista Meksyk Cherry Brownie, COPPA Kraków</image:title></image:image>
+    <image:image><image:loc>https://www.coppaspecialty.cafe/img/kawa-ziarnista/honduras-hazel-strike-640.webp</image:loc><image:title>Kawa ziarnista Honduras Hazel Strike, COPPA Kraków</image:title></image:image>
+    <image:image><image:loc>https://www.coppaspecialty.cafe/img/kawa-ziarnista/kolumbia-candy-maze-640.webp</image:loc><image:title>Kawa ziarnista Kolumbia Candy Maze, COPPA Kraków</image:title></image:image>
+    <image:image><image:loc>https://www.coppaspecialty.cafe/img/kawa-ziarnista/salwador-el-limar-anaerobic-pacamara-640.webp</image:loc><image:title>Kawa ziarnista Salwador El Limar Anaerobic Pacamara, COPPA Kraków</image:title></image:image>
+    <image:image><image:loc>https://www.coppaspecialty.cafe/img/kawa-ziarnista/burundi-nemba-kayanza-640.webp</image:loc><image:title>Kawa ziarnista Burundi Nemba Kayanza, COPPA Kraków</image:title></image:image>
+    <image:image><image:loc>https://www.coppaspecialty.cafe/img/kawa-ziarnista/etiopia-dimtu-tero-farm-640.webp</image:loc><image:title>Kawa ziarnista Etiopia Dimtu Tero Farm, COPPA Kraków</image:title></image:image>
+    <image:image><image:loc>https://www.coppaspecialty.cafe/img/kawa-ziarnista/rwanda-nyamurinda-640.webp</image:loc><image:title>Kawa ziarnista Rwanda Nyamurinda, COPPA Kraków</image:title></image:image>
+    <image:image><image:loc>https://www.coppaspecialty.cafe/img/kawa-ziarnista/kenia-karimikui-aa-640.webp</image:loc><image:title>Kawa ziarnista Kenia Karimikui AA, COPPA Kraków</image:title></image:image>
+    <image:image><image:loc>https://www.coppaspecialty.cafe/img/kawa-ziarnista/etiopia-wildflower-640.webp</image:loc><image:title>Kawa ziarnista Etiopia Wildflower, COPPA Kraków</image:title></image:image>
+    <image:image><image:loc>https://www.coppaspecialty.cafe/img/kawa-ziarnista/kostaryka-fruit-pie-640.webp</image:loc><image:title>Kawa ziarnista Kostaryka Fruit Pie, COPPA Kraków</image:title></image:image>
   </url>
 </urlset>

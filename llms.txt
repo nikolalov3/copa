@@ -25,3 +25,25 @@ Osoby szukające dobrego tiramisu w Krakowie (także bez kawy lub bez alkoholu),
 ## Strony
 - Strona główna: / (tiramisu, miejsce, kawa, na miejscu, pytania, kontakt)
 - English version: /en/
+- Kawa ziarnista (lista i ceny): /kawa-ziarnista/
+
+## Kawa ziarnista (sprzedaż stacjonarna, stan na 26.11.2026)
+Najpierw spróbuj. Potem zabierz do domu. Kawę z każdej paczki można spróbować na miejscu; bariści pomagają dobrać ziarna do smaku i sposobu parzenia. Sprzedaż tylko stacjonarnie w COPPA na Krowodrzy.
+- Kawy ziarniste do espresso:
+  - Brazylia Caramel Kiss (kawa ziarnista specialty do espresso): polecamy do cappuccino. 250 g 56 zł, 500 g 89 zł, 1000 g 159 zł.
+  - Brazylia Sweet Espresso (kawa ziarnista specialty do espresso): polecamy do flat white. 250 g 69 zł, 500 g 95 zł, 1000 g 169 zł.
+  - Etiopia Mind-Blower (kawa ziarnista specialty do espresso): polecamy do klasycznego espresso. 250 g 71 zł, 500 g 132 zł, 1000 g 230 zł.
+  - Meksyk Cherry Brownie (kawa ziarnista specialty do espresso): polecamy do cortado. 250 g 69 zł.
+  - Honduras Hazel Strike (kawa ziarnista specialty do espresso): polecamy do latte. 250 g 59 zł, 500 g 97 zł.
+- Kawy ziarniste do metod przelewowych:
+  - Kolumbia Candy Maze (kawa ziarnista specialty do przelewu): polecamy do przelewu na lodzie. 250 g 76 zł.
+  - Salwador El Limar Anaerobic Pacamara (kawa ziarnista specialty do przelewu od Gringo Nordic): polecamy do dripa V60: warto spróbować jej również po lekkim przestygnięciu. 250 g 73 zł.
+  - Burundi Nemba Kayanza (kawa ziarnista specialty do przelewu od Gringo Nordic): polecamy do przelewu na lodzie. 250 g 71 zł.
+  - Etiopia Dimtu Tero Farm (kawa ziarnista specialty do przelewu od Gringo Nordic): polecamy do dripa V60. 250 g 73 zł.
+  - Rwanda Nyamurinda (kawa ziarnista specialty do przelewu od Gringo Nordic): polecamy do ekspresu przelewowego. 250 g 66 zł.
+  - Kenia Karimikui AA (kawa ziarnista specialty do przelewu od Gringo Nordic): polecamy do dripa V60. 250 g 79 zł.
+  - Etiopia Wildflower (kawa ziarnista specialty do przelewu): polecamy do dripa V60. 250 g 71 zł.
+  - Kostaryka Fruit Pie (kawa ziarnista specialty do przelewu): polecamy do ekspresu przelewowego. 250 g 71 zł.
+- Kawy bezkofeinowe (decaf):
+  - Gringo Nordic Senza (kawa ziarnista bezkofeinowa do espresso): polecamy do cappuccino. 500 g 111 zł.
+  - Kolumbia Decaf (kawa ziarnista bezkofeinowa do przelewu od Roastains): polecamy do dripa V60. 250 g 79 zł.

@@ -245,3 +245,7 @@ img[data-fade].ld{opacity:1}
   .rev .gal-arrows{flex-direction:row-reverse}
   .rev .gal-arrows svg{transform:scaleX(-1)}
 }
+
+/* linki w tekście: sekcja Kawa i FAQ (np. do /kawa-ziarnista/) */
+.rows dd a,.faq-list p a{color:var(--rose);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+.rows dd a:hover,.faq-list p a:hover{color:var(--plum)}
