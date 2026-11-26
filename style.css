@@ -249,3 +249,15 @@ img[data-fade].ld{opacity:1}
 /* linki w tekście: sekcja Kawa i FAQ (np. do /kawa-ziarnista/) */
 .rows dd a,.faq-list p a{color:var(--rose);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
 .rows dd a:hover,.faq-list p a:hover{color:var(--plum)}
+
+/* mini sekcja: kawa ziarnista (pelna lista na /kawa-ziarnista/) */
+.beans-teaser{padding:96px 0 40px}
+.bt-grid{display:grid;gap:30px}
+.bt-fig img{width:100%;height:auto;display:block;border-radius:6px;background:var(--paper-2);aspect-ratio:4/5;object-fit:cover}
+.bt-copy .btn{margin-top:26px}
+.bt-jump{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
+.bt-jump a{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 16px;border:1px solid var(--line-strong);border-radius:999px;font-size:.86rem;color:var(--ink)}
+.bt-jump a:hover{border-color:var(--ink)}
+.bt-jump a span{font-family:var(--mono);font-size:.74rem;color:var(--rose)}
+@media (max-width:899px){.bt-fig{max-width:440px}}
+@media (min-width:900px){.bt-grid{grid-template-columns:.8fr 1.2fr;column-gap:64px;align-items:center}}
